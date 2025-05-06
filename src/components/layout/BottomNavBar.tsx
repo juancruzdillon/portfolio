@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Linkedin, PlusSquare, MessageCircle, User, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import React from 'react'; // Changed from "import type React"
+import React from 'react';
+import Image from 'next/image'; // Added missing import
 import {
   Dialog,
   DialogContent,
@@ -18,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { sendEmail } from '@/services/email'; 
 
@@ -56,7 +58,10 @@ export function BottomNavBar() {
   const { toast } = useToast();
   const [comment, setComment] = React.useState('');
   const [isCommentDialogOpen, setIsCommentDialogOpen] = React.useState(false);
+  
   const [isInboxDialogOpen, setIsInboxDialogOpen] = React.useState(false);
+  const [inboxName, setInboxName] = React.useState('');
+  const [inboxEmail, setInboxEmail] = React.useState('');
   const [inboxMessage, setInboxMessage] = React.useState('');
 
   const handleCommentSubmit = async () => {
@@ -73,23 +78,41 @@ export function BottomNavBar() {
 
   const handleInboxSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inboxMessage.trim()) {
-      toast({ title: "Oops!", description: "Message cannot be empty.", variant: "destructive" });
+    if (!inboxName.trim()) {
+      toast({ title: "Oops!", description: "Por favor, ingresa tu nombre.", variant: "destructive" });
       return;
     }
+    if (!inboxEmail.trim()) {
+      toast({ title: "Oops!", description: "Por favor, ingresa tu email.", variant: "destructive" });
+      return;
+    }
+    if (!inboxMessage.trim()) {
+      toast({ title: "Oops!", description: "El mensaje no puede estar vacío.", variant: "destructive" });
+      return;
+    }
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(inboxEmail)) {
+        toast({ title: "Oops!", description: "Por favor, ingresa un email válido.", variant: "destructive" });
+        return;
+    }
+
     try {
       await sendEmail({
         to: 'juancruzdillon1999@gmail.com',
-        from: 'portfolio-contact@example.com', // Replace with a valid sender or use a backend proxy
-        subject: 'New Message from PortfoliTok',
-        body: `Message: ${inboxMessage}`,
+        from: inboxEmail, // Use user's email as from
+        subject: `Nuevo Mensaje de ${inboxName} desde PortfoliTok`,
+        body: `Nombre: ${inboxName}\nEmail: ${inboxEmail}\nMensaje: ${inboxMessage}`,
       });
-      toast({ title: "Message Sent!", description: "Gracias por escribirme, pronto te voy a contactar." });
+      toast({ title: "¡Mensaje Enviado!", description: "Gracias por escribirme, pronto te voy a contactar." });
+      setInboxName('');
+      setInboxEmail('');
       setInboxMessage('');
       setIsInboxDialogOpen(false);
     } catch (error) {
       console.error("Failed to send message:", error);
-      toast({ title: "Error", description: "Failed to send message. Please try again later.", variant: "destructive" });
+      toast({ title: "Error", description: "No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde.", variant: "destructive" });
     }
   };
 
@@ -143,37 +166,76 @@ export function BottomNavBar() {
 
       {/* Inbox Dialog */}
       <Dialog open={isInboxDialogOpen} onOpenChange={setIsInboxDialogOpen}>
-        <DialogContent className="sm:max-w-[425px] h-[70vh] flex flex-col">
+        <DialogContent className="sm:max-w-md flex flex-col max-h-[90vh]">
           <DialogHeader>
             <DialogTitle>Inbox</DialogTitle>
             <DialogDescription>
-              Send me a direct message. I'll get back to you soon!
+              Envíame un mensaje directo. ¡Te responderé pronto! Por favor, completa tu nombre y email.
             </DialogDescription>
           </DialogHeader>
-          <div className="flex-grow overflow-y-auto p-4 space-y-4 border rounded-md my-4">
-            {/* Chat messages area - For now, it's just an example of how it might look */}
-            <div className="flex items-start space-x-2">
-              <img src="https://picsum.photos/seed/profileavatar/40/40" alt="Juan Cruz Dillon" data-ai-hint="profile avatar" className="w-10 h-10 rounded-full" />
-              <div>
-                <p className="font-semibold">Juan Cruz Dillon</p>
-                <div className="bg-muted p-2 rounded-lg mt-1">
-                  <p className="text-sm">Hi there! How can I help you today?</p>
+          
+          <div className="flex-grow overflow-y-auto p-1 space-y-4 border rounded-md my-4">
+            <div className="p-3">
+              <div className="flex items-start space-x-2">
+                <Image
+                  src="https://picsum.photos/seed/profileavatar/40/40"
+                  alt="Juan Cruz Dillon"
+                  width={40}
+                  height={40}
+                  data-ai-hint="profile avatar"
+                  className="w-10 h-10 rounded-full"
+                />
+                <div>
+                  <p className="font-semibold text-foreground">Juan Cruz Dillon</p>
+                  <div className="bg-muted p-2 rounded-lg mt-1 shadow">
+                    <p className="text-sm text-muted-foreground">¡Hola! ¿En qué puedo ayudarte hoy?</p>
+                  </div>
                 </div>
               </div>
             </div>
             {/* Potential user messages would appear here */}
           </div>
-          <form onSubmit={handleInboxSubmit} className="mt-auto flex items-center space-x-2 p-2 border-t">
-            <Input
-              id="inboxMessage"
-              placeholder="Type your message..."
-              value={inboxMessage}
-              onChange={(e) => setInboxMessage(e.target.value)}
-              className="flex-grow"
-            />
-            <Button type="submit" size="icon">
-              <Send className="w-5 h-5" />
-            </Button>
+
+          <form onSubmit={handleInboxSubmit} className="space-y-4 p-1">
+            <div className="space-y-2">
+              <Label htmlFor="inboxName" className="text-foreground">Nombre</Label>
+              <Input
+                id="inboxName"
+                placeholder="Tu nombre completo"
+                value={inboxName}
+                onChange={(e) => setInboxName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="inboxEmail" className="text-foreground">Email</Label>
+              <Input
+                id="inboxEmail"
+                type="email"
+                placeholder="tu@email.com"
+                value={inboxEmail}
+                onChange={(e) => setInboxEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="inboxMessage" className="text-foreground">Mensaje</Label>
+              <Textarea
+                id="inboxMessage"
+                placeholder="Escribe tu mensaje aquí..."
+                value={inboxMessage}
+                onChange={(e) => setInboxMessage(e.target.value)}
+                className="min-h-[80px]"
+                required
+              />
+            </div>
+            <DialogFooter className="pt-2">
+                <Button type="button" variant="outline" onClick={() => setIsInboxDialogOpen(false)}>Cancelar</Button>
+                <Button type="submit" className="flex items-center">
+                    <Send className="w-4 h-4 mr-2" />
+                    Enviar Mensaje
+                </Button>
+            </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
