@@ -58,21 +58,7 @@ export default function ProfilePage() {
       <main className="flex-grow container mx-auto px-0 sm:px-4 pt-4 md:pt-6 pb-20 md:pb-8"> {/* Adjusted padding */}
         
         <header className="relative flex flex-col items-center text-center p-4 mb-6 overflow-hidden rounded-lg">
-          {/* Banner Image */}
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="https://picsum.photos/seed/profilebanner/1200/300" 
-              alt="Profile Banner"
-              layout="fill"
-              objectFit="cover"
-              containerClassName="w-full h-full"
-              imgClassName="opacity-30" // Adjust opacity as needed
-              data-ai-hint="abstract banner"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div> {/* Gradient overlay */}
-          </div>
-
-          {/* Profile content - ensure it's above the banner with z-10 */}
+          {/* Profile content */}
           <div className="relative z-10 flex flex-col items-center pt-8 pb-4">
             <Image
               src={avatarUrl}
@@ -106,10 +92,15 @@ export default function ProfilePage() {
             </p>
 
             {githubUrl && (
-              <div className="mt-2 mb-4">
+              <div className="mt-4 mb-4">
                 <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Juan Cruz Dillon">
-                  <Button variant="outline" size="icon" className="rounded-full hover:bg-accent/20">
-                    <Github className="h-5 w-5 text-foreground" />
+                  <Button 
+                    variant="default" 
+                    size="lg" 
+                    className="rounded-full shadow-lg hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90"
+                  >
+                    <Github className="h-5 w-5 mr-2" />
+                    Ver en GitHub
                   </Button>
                 </Link>
               </div>
