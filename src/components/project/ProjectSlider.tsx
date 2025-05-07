@@ -1,7 +1,7 @@
 "use client";
 
 import type React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -59,126 +59,57 @@ const ViewMoreSlide: React.FC = () => {
 
 
 const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
-
+  const [currentIndex, setCurrentIndex] = useState(0);
   const projectsToShow = projects.slice(0, 6);
-  const totalSlides = projectsToShow.length + 1; // +1 for ViewMoreSlide
+  // totalSlides includes projects to show + 1 for the "View More" slide
+  const totalSlides = projectsToShow.length + 1;
 
-  const checkScrollPosition = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, clientWidth, scrollWidth } = scrollContainerRef.current;
-      setIsAtStart(scrollLeft <= 5); // Add small tolerance for float precision
-      // Add a small tolerance for floating point precision, ensure it's truly at the end
-      setIsAtEnd(scrollLeft >= scrollWidth - clientWidth - 5);
-    }
-  };
-  
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      checkScrollPosition(); // Initial check
-      
-      const handleResize = () => checkScrollPosition();
-      window.addEventListener('resize', handleResize);
-      
-      // Re-check if projectsToShow changes, affecting scrollWidth
-      // This might be needed if projectsToShow could change dynamically beyond initial load
-      // For now, resize is the primary dynamic factor after initial load.
-      
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [projectsToShow.length]); // Dependency on length of projects to show
+  const isAtStart = currentIndex === 0;
+  // isAtEnd is true when the "View More" slide is active, or if no projects, the "View More" (which is the only slide) is active.
+  const isAtEnd = currentIndex === totalSlides - 1;
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const { children, scrollLeft, clientWidth, scrollWidth } = container;
-
-      if (children.length === 0) return;
-
-      const firstCard = children[0] as HTMLElement;
-      const cardWidth = firstCard.offsetWidth;
-      
-      let gap = 16; // Default to 1rem (16px) for space-x-4
-      // Try to get Tailwind's space-x value more reliably if needed, or use a fixed known value
-      // For simplicity, assuming space-x-4 (1rem = 16px) or space-x-3 (0.75rem = 12px)
-      // The actual gap might vary based on viewport for sm:space-x-4.
-      // Let's take the smaller gap for calculation to be safe, or detect dynamically.
-      // Using fixed value for simplicity with scroll-snap.
-      const cardOuterWidth = cardWidth + (container.classList.contains('sm:space-x-4') ? 16 : 12);
-
-
-      let targetScrollLeft;
-
-      if (direction === 'right') {
-        // Find the first card that is currently partially or fully off-screen to the right
-        let currentCardIndex = -1;
-        for(let i=0; i<children.length; i++) {
-            const child = children[i] as HTMLElement;
-            if(child.offsetLeft + child.offsetWidth > scrollLeft + clientWidth / 2) { // card is mostly visible or to the right
-                currentCardIndex = i;
-                break;
-            }
-        }
-        // target the next card, or stay if last
-        const nextIndex = Math.min(currentCardIndex + 1, children.length -1);
-        targetScrollLeft = (children[nextIndex] as HTMLElement).offsetLeft;
-
-
-      } else { // direction === 'left'
-         // Find the first card that is mostly visible or to the left of viewport center
-        let currentCardIndex = children.length -1;
-         for(let i=0; i<children.length; i++) {
-            const child = children[i] as HTMLElement;
-            if(child.offsetLeft >= scrollLeft - clientWidth / 2 ) {
-                currentCardIndex = i;
-                break;
-            }
-        }
-        // target the previous card, or stay if first
-        const prevIndex = Math.max(currentCardIndex -1, 0);
-        targetScrollLeft = (children[prevIndex] as HTMLElement).offsetLeft;
-      }
-      
-      // Ensure targetScrollLeft is within bounds
-      targetScrollLeft = Math.max(0, Math.min(targetScrollLeft, scrollWidth - clientWidth));
-
-      container.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+  const navigateSlide = (direction: 'left' | 'right') => {
+    if (direction === 'left') {
+      setCurrentIndex((prevIndex) => Math.max(0, prevIndex - 1));
+    } else {
+      // Ensure we don't go beyond the "View More" slide
+      setCurrentIndex((prevIndex) => Math.min(totalSlides - 1, prevIndex + 1));
     }
   };
 
-  
+  // Determine if the current slide is a project or the "View More" slide
+  const isViewMoreSlideActive = currentIndex === projectsToShow.length;
+  const currentProject = !isViewMoreSlideActive ? projectsToShow[currentIndex] : null;
+
   return (
-    <div className="relative w-full group"> {/* Added group for hover effects on arrows if ProjectSlider itself is the group target */}
-      <div
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide space-x-3 sm:space-x-4 pb-2 -mb-2" 
-        onScroll={checkScrollPosition}
-      >
-        {projectsToShow.map((project) => (
-          <div key={project.id} className="snap-center shrink-0 w-52 h-72 sm:w-60 sm:h-80 md:w-64 md:h-[22rem]">
-            <ProjectSlideCard project={project} />
-          </div>
-        ))}
-        <div className="snap-center shrink-0 w-52 h-72 sm:w-60 sm:h-80 md:w-64 md:h-[22rem]">
+    <div className="relative w-full group flex flex-col items-center">
+      {/* Container for the single visible card */}
+      <div className="w-52 h-72 sm:w-60 sm:h-80 md:w-64 md:h-[22rem] flex items-center justify-center">
+        {currentProject ? (
+          <ProjectSlideCard project={currentProject} />
+        ) : isViewMoreSlideActive ? (
           <ViewMoreSlide />
-        </div>
+        ) : (
+          // Fallback for no projects and not "View More" (e.g., if projectsToShow is empty, currentIndex is 0, isViewMoreSlideActive is true)
+          // This case should ideally be handled by ViewMoreSlide if projectsToShow is empty.
+          // If projectsToShow is empty, currentIndex is 0, projectsToShow.length is 0. So isViewMoreSlideActive = true.
+          // totalSlides will be 1. isAtStart and isAtEnd will be true. Arrows won't show.
+          // This means if no projects, it will show ViewMoreSlide correctly.
+          null
+        )}
       </div>
 
-      {totalSlides > 1 && ( // Show arrows only if there's more than one slide conceptually
+      {/* Navigation Arrows - only show if there's more than one conceptual slide */}
+      {totalSlides > 1 && (
         <>
           <Button
             variant="outline"
             size="icon"
             className={cn(
-                "absolute left-0 top-1/2 -translate-y-1/2 transform -translate-x-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-                isAtStart && "opacity-30 cursor-not-allowed"
+              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              isAtStart && "opacity-30 cursor-not-allowed"
             )}
-            onClick={() => scroll('left')}
+            onClick={() => navigateSlide('left')}
             disabled={isAtStart}
             aria-label="Previous project"
           >
@@ -188,10 +119,10 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-                "absolute right-0 top-1/2 -translate-y-1/2 transform translate-x-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-                isAtEnd && "opacity-30 cursor-not-allowed"
+              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              isAtEnd && "opacity-30 cursor-not-allowed"
             )}
-            onClick={() => scroll('right')}
+            onClick={() => navigateSlide('right')}
             disabled={isAtEnd}
             aria-label="Next project"
           >
