@@ -66,13 +66,10 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                     index > 0 && "ml-4", // Adjust spacing as needed if items are too close
                     index < displayItems.length - 1 && "mr-4"
                   )}
-                  onMouseEnter={handleOpen}
-                  onMouseLeave={handleClose}
-                  onFocus={handleOpen} // Open on focus for accessibility
-                  onBlur={handleClose}  // Close on blur (with delay)
+                  
                 >
                   {/* Dot on the timeline */}
-                  <div className="w-7 h-7 bg-background border-[5px] border-primary rounded-full group-hover:scale-110 group-focus:scale-110 transition-transform duration-200 ease-in-out shadow-md"></div>
+                  <div onMouseEnter={handleOpen} onMouseLeave={handleClose} onFocus={handleOpen} onBlur={handleClose} className="w-7 h-7 bg-background border-[5px] border-primary rounded-full group-hover:scale-110 group-focus:scale-110 transition-transform duration-200 ease-in-out shadow-md"></div>
                 </button>
               </PopoverTrigger>
               <PopoverContent

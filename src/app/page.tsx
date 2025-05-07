@@ -4,20 +4,18 @@ import type React from 'react';
 import { BottomNavBar } from '@/components/layout/BottomNavBar';
 import { homePageSectionsData } from '@/data/portfolio-data';
 import type { HomePageSection } from '@/data/types';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import NextImage from 'next/image'; // Use NextImage directly for layout="fill"
+import NextImage from 'next/image';
 
 const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
   return (
     <div 
-      className="h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 overflow-hidden"
+      className="h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 overflow-hidden p-4" // Added padding for content
       style={{
         scrollSnapAlign: 'start',
       }}
     >
       {section.backgroundImageUrl && (
-        <NextImage // Changed to NextImage for direct fill usage
+        <NextImage
           src={section.backgroundImageUrl}
           alt={section.title}
           layout="fill"
@@ -25,20 +23,17 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
           quality={85}
           className="z-0 brightness-50"
           data-ai-hint="abstract background"
-          priority={section.id === homePageSectionsData[0].id} // Prioritize first section image
+          priority={section.id === homePageSectionsData[0].id} 
         />
       )}
-      <div className="relative z-10 p-8 bg-black/50 rounded-lg shadow-xl max-w-xl text-center">
-        <h2 className="text-4xl font-bold mb-4">{section.title}</h2>
-        {/* Ensure this div allows text color inheritance or sets it to white if needed */}
-        <div className="text-lg text-white/90"> {/* Ensured content text is light */}
+      <div className="relative z-10 p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg shadow-xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-center w-full"> {/* Adjusted max-width and added w-full */}
+        {/* For project type, content is handled by ProjectSlider directly */}
+        {section.type !== 'projects' && (
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">{section.title}</h2>
+        )}
+        <div className="text-sm sm:text-base md:text-lg text-white/90 w-full">
           {section.content}
         </div>
-        {section.type === 'projects' && (
-          <Button asChild variant="secondary" className="mt-6">
-            <Link href="/profile#projects">View All Projects</Link>
-          </Button>
-        )}
       </div>
     </div>
   );
@@ -48,7 +43,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col h-full">
       <main 
-        className="flex-grow overflow-y-auto w-full"
+        className="flex-grow overflow-y-auto w-full group" // Added group for hover effects on arrows
         style={{
           scrollSnapType: 'y mandatory',
           height: 'calc(100% - 4rem)', // Account for bottom nav bar
@@ -64,4 +59,3 @@ export default function HomePage() {
     </div>
   );
 }
-

@@ -11,6 +11,7 @@ import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
 import { Briefcase, MessageSquare, TrendingUp } from 'lucide-react';
 import Timeline from '@/components/ui/timeline'; // Import the new Timeline component
+import ProjectSlider from '@/components/project/ProjectSlider'; // Import the new ProjectSlider component
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
@@ -55,6 +56,45 @@ export const projectsData: Project[] = [
     technologies: [technologies.nextjs, technologies.react, technologies.tailwind, technologies.typescript],
     duration: '1 Month',
     collaborators: ['Self-directed'],
+    repoLink: '#',
+  },
+   {
+    id: 'project-4',
+    title: 'Task Management App',
+    shortDescription: 'A Kanban-style task manager for individuals and teams.',
+    longDescription: 'Created a task management application with features like drag-and-drop boards, task assignment, due dates, and progress tracking. Focused on a collaborative and intuitive user experience.',
+    imageUrl: 'https://picsum.photos/seed/project4/600/800',
+    technologies: [technologies.react, technologies.typescript, technologies.tailwind],
+    duration: '2 Months',
+    repoLink: '#',
+  },
+  {
+    id: 'project-5',
+    title: 'Recipe Finder API',
+    shortDescription: 'A RESTful API for searching and retrieving recipes.',
+    longDescription: 'Developed a backend API service that allows users to search for recipes based on ingredients, cuisine type, or dietary restrictions. Implemented with Node.js and Express, using a third-party recipe database.',
+    imageUrl: 'https://picsum.photos/seed/project5/600/800',
+    technologies: [technologies.nodejs, technologies.javascript],
+    duration: '1.5 Months',
+    liveLink: '#',
+  },
+  {
+    id: 'project-6',
+    title: 'Weather Dashboard',
+    shortDescription: 'A simple dashboard to display current weather and forecasts.',
+    longDescription: 'Built a weather dashboard that fetches and displays weather information from an external API. Users can search for locations and view current conditions, hourly, and daily forecasts.',
+    imageUrl: 'https://picsum.photos/seed/project6/600/800',
+    technologies: [technologies.html, technologies.css, technologies.javascript],
+    duration: '3 Weeks',
+  },
+  {
+    id: 'project-7',
+    title: 'Personal Blog Platform',
+    shortDescription: 'A minimalistic blogging platform with Markdown support.',
+    longDescription: 'Designed and developed a clean, content-focused blogging platform. Supports writing posts in Markdown, categorizing articles, and a simple, responsive reading experience.',
+    imageUrl: 'https://picsum.photos/seed/project7/600/800',
+    technologies: [technologies.nextjs, technologies.react, technologies.tailwind],
+    duration: '2 Months',
     repoLink: '#',
   },
 ];
@@ -102,23 +142,23 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <div className="w-[150px] h-[150px] mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg relative">
-            <Image
-              src="https://picsum.photos/seed/aboutmeavatar/150/150"
-              alt="Juan Cruz Dillon"
-              layout="fill" 
-              objectFit="cover"
-              containerClassName="w-full h-full"
-              imgClassName="rounded-full" // Ensure image itself is rounded if container is
-              data-ai-hint="profile avatar"
-            />
-          </div>
+          <Image
+            src="https://picsum.photos/seed/aboutmeavatar/150/150"
+            alt="Juan Cruz Dillon"
+            width={150}
+            height={150}
+            containerClassName="mb-6 mx-auto w-[150px] h-[150px]"
+            imgClassName="w-full h-full object-cover rounded-full border-4 border-primary shadow-lg"
+            data-ai-hint="profile avatar"
+          />
+
           <h3 className="text-2xl font-semibold mb-2 text-white">Hi, I'm Juan Cruz!</h3>
           <p className="text-lg text-white/90">
             A passionate Front End Developer from Argentina, specializing in creating modern and responsive web applications.
             I love turning complex problems into beautiful, intuitive designs.
           </p>
         </div>
+
       </React.Fragment>
     ),
     backgroundImageUrl: 'https://picsum.photos/seed/aboutmebg/1080/1920',
@@ -129,12 +169,15 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Projects',
     content: (
       <React.Fragment>
-       <div className="p-4 text-center">
-        <Briefcase className="mx-auto h-16 w-16 mb-4 text-primary" />
-        <h3 className="text-2xl font-semibold mb-2 text-white">My Work</h3>
-        <p className="text-lg text-white/90">
-          Here are some of the projects I've worked on. Click to see more details!
+       <div className="p-4 text-center flex flex-col items-center justify-center h-full">
+        <Briefcase className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">My Work</h3>
+        <p className="text-base sm:text-lg text-white/90 mb-6">
+          Swipe or use arrows to browse projects. Click a project for details.
         </p>
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+            <ProjectSlider projects={projectsData} />
+        </div>
       </div>
       </React.Fragment>
     ),
