@@ -84,7 +84,7 @@ export const homePageSectionsData: HomePageSection[] = [
             alt="Juan Cruz Dillon"
             width={150}
             height={150}
-            containerClassName="block mx-auto mb-6" // Ensured block display for centering
+            containerClassName="inline-block mb-6" // Use inline-block for parent's text-center to work
             imgClassName="rounded-full border-4 border-primary shadow-lg"
             data-ai-hint="profile photo"
           />
