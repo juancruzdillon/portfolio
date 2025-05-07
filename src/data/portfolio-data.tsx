@@ -1,6 +1,7 @@
 
 import type { ProfileData, Project, HomePageSection, Technology } from './types';
 import React from 'react'; // Import React for JSX
+import Image from '@/components/ui/image'; // Added import for Image component
 import ReactIcon from '@/icons/ReactIcon';
 import NextjsIcon from '@/icons/NextjsIcon';
 import TailwindIcon from '@/icons/TailwindIcon';
@@ -78,9 +79,18 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <Smile className="mx-auto h-16 w-16 mb-4 text-primary" />
+          <Image
+            src="https://picsum.photos/seed/aboutmeavatar/150/150"
+            alt="Juan Cruz Dillon"
+            width={150}
+            height={150}
+            containerClassName="mx-auto mb-6"
+            imgClassName="rounded-full border-4 border-primary shadow-lg"
+            data-ai-hint="profile photo"
+          />
+          <Smile className="mx-auto h-12 w-12 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Hi, I'm Juan Cruz!</h3>
-          <p className="text-lg text-foreground/80">
+          <p className="text-lg">
             A passionate Front End Developer from Argentina, specializing in creating modern and responsive web applications.
             I love turning complex problems into beautiful, intuitive designs.
           </p>
@@ -98,7 +108,7 @@ export const homePageSectionsData: HomePageSection[] = [
        <div className="p-4 text-center">
         <Briefcase className="mx-auto h-16 w-16 mb-4 text-primary" />
         <h3 className="text-2xl font-semibold mb-2">My Work</h3>
-        <p className="text-lg text-foreground/80">
+        <p className="text-lg">
           Here are some of the projects I've worked on. Click to see more details!
         </p>
       </div>
@@ -115,7 +125,7 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center">
           <Users className="mx-auto h-16 w-16 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Professional Journey</h3>
-          <ul className="text-lg text-foreground/80 list-disc list-inside">
+          <ul className="text-lg list-disc list-inside text-left mx-auto max-w-md">
             <li>Frontend Developer at Tech Solutions Inc. (2021-Present)</li>
             <li>Junior Developer at Web Wizards Co. (2019-2021)</li>
             <li>Intern at CodeCrafters (2018)</li>
@@ -134,7 +144,7 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center">
           <MessageSquare className="mx-auto h-16 w-16 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Get In Touch</h3>
-          <p className="text-lg text-foreground/80">
+          <p className="text-lg">
             Have a project in mind or just want to say hi? Feel free to reach out! You can use the inbox feature below.
           </p>
         </div>
@@ -143,3 +153,4 @@ export const homePageSectionsData: HomePageSection[] = [
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
+

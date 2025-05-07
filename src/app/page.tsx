@@ -6,7 +6,7 @@ import { homePageSectionsData } from '@/data/portfolio-data';
 import type { HomePageSection } from '@/data/types';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
+import NextImage from 'next/image'; // Use NextImage directly for layout="fill"
 
 const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
   return (
@@ -17,7 +17,7 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
       }}
     >
       {section.backgroundImageUrl && (
-        <Image
+        <NextImage // Changed to NextImage for direct fill usage
           src={section.backgroundImageUrl}
           alt={section.title}
           layout="fill"
@@ -25,11 +25,13 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
           quality={85}
           className="z-0 brightness-50"
           data-ai-hint="abstract background"
+          priority={section.id === homePageSectionsData[0].id} // Prioritize first section image
         />
       )}
       <div className="relative z-10 p-8 bg-black/50 rounded-lg shadow-xl max-w-xl text-center">
         <h2 className="text-4xl font-bold mb-4">{section.title}</h2>
-        <div className="text-lg">
+        {/* Ensure this div allows text color inheritance or sets it to white if needed */}
+        <div className="text-lg text-white/90"> {/* Ensured content text is light */}
           {section.content}
         </div>
         {section.type === 'projects' && (
@@ -62,3 +64,4 @@ export default function HomePage() {
     </div>
   );
 }
+
