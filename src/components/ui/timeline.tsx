@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -45,7 +44,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
           const handleClose = () => {
             timerRef.current = setTimeout(() => {
               setIsOpen(false);
-            }, 100); // 100ms delay before closing
+            }, 250); // Increased delay from 100ms to 250ms
           };
 
           useEffect(() => {
@@ -64,7 +63,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                   aria-label={`View details for ${item.title} at ${item.company}`}
                   className={cn(
                     "relative flex flex-col items-center group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full",
-                    index > 0 && "ml-4",
+                    index > 0 && "ml-4", // Adjust spacing as needed if items are too close
                     index < displayItems.length - 1 && "mr-4"
                   )}
                   onMouseEnter={handleOpen}
