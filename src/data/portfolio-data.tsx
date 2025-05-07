@@ -1,3 +1,4 @@
+
 import type { ProfileData, Project, HomePageSection, Technology } from './types';
 import React from 'react'; // Import React for JSX
 import Image from '@/components/ui/image';
@@ -142,7 +143,7 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <Image
+           <Image
             src="https://picsum.photos/seed/aboutmeavatar/150/150"
             alt="Juan Cruz Dillon"
             width={150}
@@ -151,14 +152,12 @@ export const homePageSectionsData: HomePageSection[] = [
             imgClassName="w-full h-full object-cover rounded-full border-4 border-primary shadow-lg"
             data-ai-hint="profile avatar"
           />
-
           <h3 className="text-2xl font-semibold mb-2 text-white">Hi, I'm Juan Cruz!</h3>
           <p className="text-lg text-white/90">
             A passionate Front End Developer from Argentina, specializing in creating modern and responsive web applications.
             I love turning complex problems into beautiful, intuitive designs.
           </p>
         </div>
-
       </React.Fragment>
     ),
     backgroundImageUrl: 'https://picsum.photos/seed/aboutmebg/1080/1920',
@@ -192,7 +191,8 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center max-w-4xl mx-auto w-full flex flex-col items-center">
           <TrendingUp className="mx-auto h-16 w-16 mb-6 text-primary" />
           <h3 className="text-3xl font-bold mb-2 text-white">Professional Journey</h3>
-          <p className="text-sm text-white/70 mb-10">Click on the timeline points to see details.</p>
+          <p className="text-sm text-white/70 mb-10 md:hidden">Tap on the timeline dots to see details.</p>
+          <p className="text-sm text-white/70 mb-10 hidden md:block">Hover or click on the timeline dots to see details.</p>
           <div className="w-full"> {/* Container for the timeline */}
             <Timeline items={experienceItems} />
           </div>
