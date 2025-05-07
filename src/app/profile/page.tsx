@@ -100,13 +100,22 @@ export default function ProfilePage() {
 
         <Tabs defaultValue="grid" className="w-full">
           <TabsList className="grid w-full grid-cols-3 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
-            <TabsTrigger value="grid" className="py-3 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none">
+            <TabsTrigger 
+              value="grid" 
+              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
+            >
               <LayoutGrid className="h-5 w-5" />
             </TabsTrigger>
-            <TabsTrigger value="videos" className="py-3 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none">
+            <TabsTrigger 
+              value="videos" 
+              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
+            >
               <Clapperboard className="h-5 w-5" />
             </TabsTrigger>
-            <TabsTrigger value="liked" className="py-3 data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none">
+            <TabsTrigger 
+              value="liked" 
+              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
+            >
               <Heart className="h-5 w-5" />
             </TabsTrigger>
           </TabsList>
@@ -137,3 +146,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
