@@ -95,12 +95,31 @@ export default function ProfilePage() {
             {githubUrl && (
               <div className="mt-4 mb-4">
                 <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Juan Cruz Dillon">
-                  <Button 
-                    variant="default" 
-                    size="lg" 
-                    className="rounded-full shadow-lg hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 p-3"
+                  <Button
+                    variant="default"
+                    className="
+                      rounded-full 
+                      p-3 sm:p-4
+                      
+                      bg-gradient-to-br from-primary to-accent 
+                      hover:bg-gradient-to-tl hover:from-accent hover:to-primary
+                      
+                      text-primary-foreground
+                      
+                      shadow-xl 
+                      hover:shadow-2xl
+                      
+                      transform transition-all duration-300 ease-out
+                      hover:scale-110 
+                      hover:[&_svg]:filter hover:[&_svg]:drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]
+
+                      focus:outline-none 
+                      focus:ring-4 focus:ring-offset-2 focus:ring-offset-background focus:ring-accent/80
+                      
+                      active:scale-100
+                    "
                   >
-                    <GithubIcon className="h-8 w-8" />
+                    <GithubIcon className="h-8 w-8 sm:h-9 sm:h-9 transition-transform duration-300" />
                   </Button>
                 </Link>
               </div>
@@ -112,7 +131,7 @@ export default function ProfilePage() {
           <TabsList className="grid p-0 w-full grid-cols-1 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
             <TabsTrigger 
               value="grid" 
-              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
+              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none focus-visible:ring-offset-0 focus-visible:ring-2 focus-visible:ring-ring"
             >
               <LayoutGrid className="h-5 w-5" />
             </TabsTrigger>
