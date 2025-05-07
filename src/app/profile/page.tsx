@@ -98,9 +98,9 @@ export default function ProfilePage() {
                   <Button 
                     variant="default" 
                     size="lg" 
-                    className="rounded-full shadow-lg hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 p-3" // Added padding to button
+                    className="rounded-full shadow-lg hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90 p-3"
                   >
-                    <GithubIcon className="h-8 w-8" /> {/* Increased icon size */}
+                    <GithubIcon className="h-8 w-8" />
                   </Button>
                 </Link>
               </div>
@@ -138,3 +138,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
