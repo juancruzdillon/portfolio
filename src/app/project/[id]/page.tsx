@@ -6,9 +6,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Briefcase, CalendarDays, Users, Globe, Github } from 'lucide-react';
+import { ArrowLeft, Briefcase, CalendarDays, Users, Globe } from 'lucide-react';
 import { BottomNavBar } from '@/components/layout/BottomNavBar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import GithubIcon from '@/icons/GithubIcon';
 
 interface ProjectPageProps {
   params: {
@@ -108,7 +109,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   {project.repoLink && (
                     <Button asChild variant="outline" className="w-full justify-start">
                       <Link href={project.repoLink} target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-4 w-4" /> Repositorio en GitHub
+                        <GithubIcon className="mr-2 h-5 w-5" /> Repositorio en GitHub
                       </Link>
                     </Button>
                   )}
@@ -122,4 +123,3 @@ export default function ProjectPage({ params }: ProjectPageProps) {
     </div>
   );
 }
-

@@ -6,8 +6,9 @@ import type { Project } from '@/data/types';
 import { Button } from '@/components/ui/button';
 import { BottomNavBar } from '@/components/layout/BottomNavBar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LayoutGrid, Play, Bookmark, Github } from 'lucide-react';
+import { LayoutGrid, Play, Bookmark } from 'lucide-react';
 import Image from '@/components/ui/image'; // Custom Image component
+import GithubIcon from '@/icons/GithubIcon';
 
 const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   // Consistent placeholder view count based on project ID or use provided views
@@ -99,8 +100,7 @@ export default function ProfilePage() {
                     size="lg" 
                     className="rounded-full shadow-lg hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-accent text-primary-foreground hover:from-primary/90 hover:to-accent/90"
                   >
-                    <Github className="h-5 w-5 mr-2" />
-                    Ver en GitHub
+                    <GithubIcon className="h-6 w-6" />
                   </Button>
                 </Link>
               </div>
