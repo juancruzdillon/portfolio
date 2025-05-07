@@ -122,6 +122,7 @@ export const profileData: ProfileData = {
     specialty: 'Front End',
   },
   projects: projectsData,
+  githubUrl: 'https://github.com/juandillon1',
 };
 
 // Experience items should be in REVERSE chronological order (newest first)
@@ -260,4 +261,3 @@ export const homePageSectionsData: HomePageSection[] = [
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
-

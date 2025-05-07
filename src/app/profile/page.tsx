@@ -6,7 +6,7 @@ import type { Project } from '@/data/types';
 import { Button } from '@/components/ui/button';
 import { BottomNavBar } from '@/components/layout/BottomNavBar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LayoutGrid, Clapperboard, Heart, Play, ChevronDown, Bookmark } from 'lucide-react';
+import { LayoutGrid, Play, Bookmark, Github } from 'lucide-react';
 import Image from '@/components/ui/image'; // Custom Image component
 
 const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
@@ -51,47 +51,69 @@ const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ projec
 };
 
 export default function ProfilePage() {
-  const { name, username, avatarUrl, bio, stats, projects } = profileData;
+  const { name, username, avatarUrl, bio, stats, projects, githubUrl } = profileData;
 
   return (
     <div className="flex flex-col min-h-screen bg-background md:pl-20"> {/* Maintain padding for desktop sidebar */}
       <main className="flex-grow container mx-auto px-0 sm:px-4 pt-4 md:pt-6 pb-20 md:pb-8"> {/* Adjusted padding */}
         
-        <header className="flex flex-col items-center text-center p-4 mb-6">
-          <Image
-            src={avatarUrl}
-            alt={name}
-            width={96} // Standard TikTok avatar size is ~96-112px
-            height={96}
-            containerClassName="w-24 h-24 mb-3"
-            imgClassName="rounded-full object-cover border-2 border-border shadow-md"
-            data-ai-hint="profile avatar"
-          />
-          <h2 className="text-xl font-semibold text-foreground">@{username}</h2>
-          <p className="text-sm text-muted-foreground mb-3">{name}</p>
-
-          <div className="flex space-x-4 sm:space-x-6 my-3 text-sm">
-            <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.age}</p>
-              <p className="text-xs text-muted-foreground">Edad</p>
-            </div>
-            <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.nationality}</p>
-              <p className="text-xs text-muted-foreground">Nacionalidad</p>
-            </div>
-            <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.specialty}</p>
-              <p className="text-xs text-muted-foreground">Especialidad</p>
-            </div>
+        <header className="relative flex flex-col items-center text-center p-4 mb-6 overflow-hidden rounded-lg">
+          {/* Banner Image */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://picsum.photos/seed/profilebanner/1200/300" 
+              alt="Profile Banner"
+              layout="fill"
+              objectFit="cover"
+              containerClassName="w-full h-full"
+              imgClassName="opacity-30" // Adjust opacity as needed
+              data-ai-hint="abstract banner"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div> {/* Gradient overlay */}
           </div>
 
-          <p className="text-sm text-foreground max-w-md mx-auto px-2 mb-4 leading-relaxed">
-            {bio}
-          </p>
+          {/* Profile content - ensure it's above the banner with z-10 */}
+          <div className="relative z-10 flex flex-col items-center pt-8 pb-4">
+            <Image
+              src={avatarUrl}
+              alt={name}
+              width={96} 
+              height={96}
+              containerClassName="w-24 h-24 mb-3"
+              imgClassName="rounded-full object-cover border-2 border-border shadow-md"
+              data-ai-hint="profile avatar"
+            />
+            <h2 className="text-xl font-semibold text-foreground">@{username}</h2>
+            <p className="text-sm text-muted-foreground mb-3">{name}</p>
 
-          <div className="flex space-x-2">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 text-sm">Seguir</Button>
-             {/* Placeholder for other buttons like Instagram icon if needed */}
+            <div className="flex space-x-4 sm:space-x-6 my-3 text-sm">
+              <div className="text-center">
+                <p className="font-semibold text-foreground">{stats.age}</p>
+                <p className="text-xs text-muted-foreground">Edad</p>
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-foreground">{stats.nationality}</p>
+                <p className="text-xs text-muted-foreground">Nacionalidad</p>
+              </div>
+              <div className="text-center">
+                <p className="font-semibold text-foreground">{stats.specialty}</p>
+                <p className="text-xs text-muted-foreground">Especialidad</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-foreground max-w-md mx-auto px-2 mb-4 leading-relaxed">
+              {bio}
+            </p>
+
+            {githubUrl && (
+              <div className="mt-2 mb-4">
+                <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label="Perfil de GitHub de Juan Cruz Dillon">
+                  <Button variant="outline" size="icon" className="rounded-full hover:bg-accent/20">
+                    <Github className="h-5 w-5 text-foreground" />
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </header>
 

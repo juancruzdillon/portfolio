@@ -32,6 +32,7 @@ export interface ProfileData {
     specialty?: string; // Made optional
   };
   projects: Project[];
+  githubUrl?: string; // Optional GitHub profile URL
 }
 
 export interface HomePageSection {
