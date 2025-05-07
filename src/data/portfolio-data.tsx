@@ -13,6 +13,7 @@ import CssIcon from '@/icons/CssIcon';
 import { Briefcase, MessageSquare, TrendingUp } from 'lucide-react';
 import Timeline from '@/components/ui/timeline'; // Import the new Timeline component
 import ProjectSlider from '@/components/project/ProjectSlider'; // Import the new ProjectSlider component
+import ContactForm from '@/components/contact/ContactForm'; // Import the new ContactForm component
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
@@ -207,15 +208,17 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Contact Me',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center">
-          <MessageSquare className="mx-auto h-16 w-16 mb-4 text-primary" />
-          <h3 className="text-2xl font-semibold mb-2 text-white">Get In Touch</h3>
-          <p className="text-lg text-white/90">
-            Have a project in mind or just want to say hi? Feel free to reach out! You can use the inbox feature below.
+        <div className="p-4 text-center w-full max-w-md mx-auto">
+          <MessageSquare className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
+          <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Get In Touch</h3>
+          <p className="text-base sm:text-lg text-white/90 mb-6">
+            Have a project in mind or just want to say hi? Fill out the form below or use the inbox feature.
           </p>
+          <ContactForm />
         </div>
       </React.Fragment>
     ),
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
+
