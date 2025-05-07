@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'PortfoliTok',
+  title: 'Portfolio | Vue.js | React.js | Programador | Full Stack',
   description: 'Juan Cruz Dillon - Portafolio',
 };
 

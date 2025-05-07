@@ -115,7 +115,7 @@ export const projectsData: Project[] = [
 export const profileData: ProfileData = {
   name: 'Juan Cruz Dillon',
   username: 'juancruzdillon',
-  avatarUrl: 'https://picsum.photos/seed/profileavatar/200/200',
+  avatarUrl: 'https://media.licdn.com/dms/image/v2/D4D03AQGxAsHBbE6B9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1679889620223?e=1752105600&v=beta&t=OarOcWN5hoHL02qrZEtI5XZtTNy0yM8Pwivy8h_OtGY',
   bio: 'Desarrollador Front End Apasionado 👨‍💻 | Convierto ideas en experiencias digitales interactivas ✨ | Entusiasta de React, Next.js, Tailwind CSS 🚀 | Argentina 🇦🇷',
   stats: {
     age: 25,
@@ -123,7 +123,7 @@ export const profileData: ProfileData = {
     specialty: 'Front End',
   },
   projects: projectsData,
-  githubUrl: 'https://github.com/juandillon1',
+  githubUrl: 'https://github.com/juancruzdillon',
 };
 
 // Experience items should be in REVERSE chronological order (newest first)
@@ -178,7 +178,7 @@ export const homePageSectionsData: HomePageSection[] = [
       </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://picsum.photos/seed/projectsbg/1080/1920',
+    backgroundImageUrl: 'https://images.unsplash.com/photo-1592636120953-3d2b28ebfd69?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'about-me',
@@ -188,7 +188,7 @@ export const homePageSectionsData: HomePageSection[] = [
       <React.Fragment>
         <div className="p-4 text-center max-w-md mx-auto">
            <Image
-            src="https://picsum.photos/seed/aboutmeavatar/150/150"
+            src="https://lh3.googleusercontent.com/pw/AP1GczMlWqE920GZHa2P6SaVrqR7_uZzpIU5pS2XkFg1HQlSphoeys9CiA2nNlUuFdAmRZ6IrHOxXVWxVsXHKjbw4sy_8FDoto2vH4j7hn9UpmQZkjD6y0o3uC_JjVCr4KcYvXRD0ay01mBZYub_ifjpp_DeNA=w979-h1305-s-no-gm?authuser=0"
             alt="Juan Cruz Dillon"
             width={150}
             height={150}
@@ -204,7 +204,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://picsum.photos/seed/aboutmebg/1080/1920',
+    backgroundImageUrl: 'https://images.unsplash.com/photo-1598162480222-b2c3d92548d5?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'experience',
@@ -223,7 +223,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://picsum.photos/seed/experiencebg/1080/1920',
+    backgroundImageUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 'memo-test-game',
@@ -241,7 +241,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://picsum.photos/seed/memogamebg/1080/1920',
+    backgroundImageUrl: 'https://images.unsplash.com/photo-1642278460334-a65640d55509?q=80&w=2712&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
    {
     id: 'contact-me-section',
@@ -259,7 +259,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
+    backgroundImageUrl: 'https://images.unsplash.com/photo-1563906267088-b029e7101114?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
 ];
 
