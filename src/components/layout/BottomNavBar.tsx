@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -17,7 +18,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label'; // Kept for Comment Dialog, not used in new chat
+// import { Label } from '@/components/ui/label'; // No longer used in new chat
 import { useToast } from '@/hooks/use-toast';
 import { sendEmail } from '@/services/email';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -82,7 +83,7 @@ export function BottomNavBar() {
   
   useEffect(() => {
     if (isInboxDialogOpen) {
-      resetChat();
+      resetChat(); // Reset chat when dialog opens
     }
   }, [isInboxDialogOpen]);
 
@@ -97,6 +98,8 @@ export function BottomNavBar() {
       return;
     }
     console.log("Comment submitted:", comment);
+    // Here you would typically send the comment to a backend service
+    // For now, we'll just show a success toast
     toast({ title: "Success!", description: "Thank you for your comment!" });
     setComment('');
     setIsCommentDialogOpen(false);
@@ -125,7 +128,7 @@ export function BottomNavBar() {
             if (!emailRegex.test(submittedText)) {
                 setChatMessages(prev => [...prev, { sender: 'bot', text: 'Por favor, ingresa un email válido.' }]);
                 // Keep stage as 'askingEmail'
-                return; // Don't clear input on validation error, let user correct
+                return; 
             }
             setUserEmail(submittedText);
             setChatMessages(prev => [...prev, { sender: 'bot', text: '¡Gracias! Ahora puedes escribirme tu mensaje.' }]);
@@ -134,8 +137,6 @@ export function BottomNavBar() {
         case 'readyToMessage': // User submitted their actual message
             try {
                 await sendEmail({
-                    to: 'juancruzdillon1999@gmail.com',
-                    from: userEmail, 
                     subject: `Nuevo Mensaje de ${userName} desde PortfoliTok`,
                     body: `Nombre: ${userName}\nEmail: ${userEmail}\nMensaje: ${submittedText}`,
                 });
@@ -215,8 +216,7 @@ export function BottomNavBar() {
       {/* Inbox Dialog (Chat Flow) */}
       <Dialog open={isInboxDialogOpen} onOpenChange={(open) => {
           setIsInboxDialogOpen(open);
-          // Reset chat when dialog is opened or closed
-          if (open) {
+          if (open) { // Only reset if opening, not on close by itself
             resetChat();
           }
         }}>
@@ -276,7 +276,7 @@ export function BottomNavBar() {
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
                   if (e.key === 'Enter' && !e.shiftKey && chatStage !== 'readyToMessage') {
                     e.preventDefault();
-                    handleChatSubmit(e as any);
+                    handleChatSubmit(e as any); // Cast to any to satisfy FormEvent requirement simply
                   }
                 }}
               />
