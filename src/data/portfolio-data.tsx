@@ -153,7 +153,7 @@ export const memoTestGameData = [
   { q: "Edad", a: "25", qIcon: UserCircle, aIcon: Award },
   { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: Sparkles },
   { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: TargetIcon },
-  { q: "Usuario", a: "@juancruzdillon", qIcon: Brain, aIcon: Briefcase },
+  { q: "Usuario", a: "@juancruzdillon", qIcon: Brain, aIcon: Briefcase }, // Use Briefcase instead of BriefcaseIcon
   { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Lightbulb },
   { q: "Framework Favorito", a: "Next.js", qIcon: NextjsIcon, aIcon: ReactIcon },
 ];
@@ -165,7 +165,7 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Sobre Mí',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center">
+        <div className="p-4 text-center max-w-md mx-auto">
            <Image
             src="https://picsum.photos/seed/aboutmeavatar/150/150"
             alt="Juan Cruz Dillon"
@@ -261,3 +261,4 @@ export const homePageSectionsData: HomePageSection[] = [
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
+
