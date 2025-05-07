@@ -32,72 +32,80 @@ export const projectsData: Project[] = [
     title: 'E-commerce Platform',
     shortDescription: 'A full-stack e-commerce solution with modern features.',
     longDescription: 'Developed a comprehensive e-commerce platform enabling users to browse products, add to cart, and complete purchases. Features include user authentication, product management, order processing, and a responsive design for optimal viewing on all devices. Integrated with Stripe for payments.',
-    imageUrl: 'https://picsum.photos/seed/project1/600/800',
+    imageUrl: 'https://picsum.photos/seed/project1/600/900', // Adjusted for portrait
     technologies: [technologies.react, technologies.nextjs, technologies.tailwind, technologies.nodejs, technologies.typescript],
     duration: '3 Months',
     collaborators: ['Jane Doe (Designer)', 'Mike Ross (Backend Dev)'],
     liveLink: '#',
     repoLink: '#',
+    isPinned: true, // First project is pinned
+    views: "680.2K"
   },
   {
     id: 'project-2',
     title: 'Social Media App',
     shortDescription: 'A social networking app focused on photo sharing.',
     longDescription: 'Built a social media application allowing users to create profiles, upload photos, follow other users, and interact with posts through likes and comments. Implemented real-time notifications and a feed algorithm. Focused on a clean UI/UX and performance.',
-    imageUrl: 'https://picsum.photos/seed/project2/600/800',
+    imageUrl: 'https://picsum.photos/seed/project2/600/900', // Adjusted for portrait
     technologies: [technologies.react, technologies.nodejs, technologies.javascript],
     duration: '4 Months',
     liveLink: '#',
+    views: "23.5K"
   },
   {
     id: 'project-3',
     title: 'Portfolio Website',
     shortDescription: 'This very portfolio website, built with Next.js and Tailwind CSS.',
     longDescription: 'Designed and developed this portfolio website to showcase my skills and projects. It features a TikTok-inspired UI, responsive design, and interactive elements. The goal was to create a unique and engaging way to present my work.',
-    imageUrl: 'https://picsum.photos/seed/project3/600/800',
+    imageUrl: 'https://picsum.photos/seed/project3/600/900', // Adjusted for portrait
     technologies: [technologies.nextjs, technologies.react, technologies.tailwind, technologies.typescript],
     duration: '1 Month',
     collaborators: ['Self-directed'],
     repoLink: '#',
+    views: "21.8K"
   },
    {
     id: 'project-4',
     title: 'Task Management App',
     shortDescription: 'A Kanban-style task manager for individuals and teams.',
     longDescription: 'Created a task management application with features like drag-and-drop boards, task assignment, due dates, and progress tracking. Focused on a collaborative and intuitive user experience.',
-    imageUrl: 'https://picsum.photos/seed/project4/600/800',
+    imageUrl: 'https://picsum.photos/seed/project4/600/900', // Adjusted for portrait
     technologies: [technologies.react, technologies.typescript, technologies.tailwind],
     duration: '2 Months',
     repoLink: '#',
+    views: "9365"
   },
   {
     id: 'project-5',
     title: 'Recipe Finder API',
     shortDescription: 'A RESTful API for searching and retrieving recipes.',
     longDescription: 'Developed a backend API service that allows users to search for recipes based on ingredients, cuisine type, or dietary restrictions. Implemented with Node.js and Express, using a third-party recipe database.',
-    imageUrl: 'https://picsum.photos/seed/project5/600/800',
+    imageUrl: 'https://picsum.photos/seed/project5/600/900', // Adjusted for portrait
     technologies: [technologies.nodejs, technologies.javascript],
     duration: '1.5 Months',
     liveLink: '#',
+    views: "9996"
   },
   {
     id: 'project-6',
     title: 'Weather Dashboard',
     shortDescription: 'A simple dashboard to display current weather and forecasts.',
     longDescription: 'Built a weather dashboard that fetches and displays weather information from an external API. Users can search for locations and view current conditions, hourly, and daily forecasts.',
-    imageUrl: 'https://picsum.photos/seed/project6/600/800',
+    imageUrl: 'https://picsum.photos/seed/project6/600/900', // Adjusted for portrait
     technologies: [technologies.html, technologies.css, technologies.javascript],
     duration: '3 Weeks',
+    views: "5388"
   },
   {
     id: 'project-7',
     title: 'Personal Blog Platform',
     shortDescription: 'A minimalistic blogging platform with Markdown support.',
     longDescription: 'Designed and developed a clean, content-focused blogging platform. Supports writing posts in Markdown, categorizing articles, and a simple, responsive reading experience.',
-    imageUrl: 'https://picsum.photos/seed/project7/600/800',
+    imageUrl: 'https://picsum.photos/seed/project7/600/900', // Adjusted for portrait
     technologies: [technologies.nextjs, technologies.react, technologies.tailwind],
     duration: '2 Months',
     repoLink: '#',
+    views: "28.7K"
   },
 ];
 
@@ -105,10 +113,15 @@ export const profileData: ProfileData = {
   name: 'Juan Cruz Dillon',
   username: 'juancruzdillon',
   avatarUrl: 'https://picsum.photos/seed/profileavatar/200/200',
+  bio: 'Passionate Front End Developer 👨‍💻 | Turning ideas into interactive digital experiences ✨ | React, Next.js, Tailwind CSS enthusiast 🚀 | Argentina 🇦🇷',
   stats: {
-    age: 25,
-    nationality: 'Argentina',
-    specialty: 'Front End',
+    following: 135,
+    followers: '204.1K',
+    likes: '11.7M',
+    // Optional, can remove if not used:
+    // age: 25, 
+    // nationality: 'Argentina',
+    // specialty: 'Front End',
   },
   projects: projectsData,
 };
