@@ -18,7 +18,7 @@ const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ projec
       key={project.id}
       href={`/project/${project.id}`}
       className="relative group aspect-[2/3] overflow-hidden rounded-sm block"
-      aria-label={`View project: ${project.title}`}
+      aria-label={`Ver proyecto: ${project.title}`}
     >
       <Image
         src={project.imageUrl}
@@ -81,7 +81,7 @@ export default function ProfilePage() {
             </div>
             <div className="text-center">
               <p className="font-semibold text-foreground">{stats.specialty}</p>
-              <p className="text-xs text-muted-foreground">Posición</p>
+              <p className="text-xs text-muted-foreground">Especialidad</p>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export default function ProfilePage() {
                 ))}
               </div>
             ) : (
-              <p className="text-center text-muted-foreground py-10">No projects to display.</p>
+              <p className="text-center text-muted-foreground py-10">No hay proyectos para mostrar.</p>
             )}
           </TabsContent>
         </Tabs>
@@ -125,4 +125,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-

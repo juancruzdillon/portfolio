@@ -93,7 +93,7 @@ export function BottomNavBar() {
 
   const handleCommentSubmit = async () => {
     if (!comment.trim()) {
-      toast({ title: "Oops!", description: "El comentario no puede estar vacío.", variant: "destructive" });
+      toast({ title: "¡Ups!", description: "El comentario no puede estar vacío.", variant: "destructive" });
       return;
     }
     console.log("Comment submitted:", comment);
@@ -106,10 +106,15 @@ export function BottomNavBar() {
 
   const handleChatSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!currentChatMessage.trim() && chatStage !== 'messageSent') {
-        toast({ title: "Oops!", description: "El campo no puede estar vacío.", variant: "destructive" });
+    if (!currentChatMessage.trim() && chatStage !== 'messageSent' && chatStage !== 'initial' && chatStage !== 'askingEmail') {
+        toast({ title: "¡Ups!", description: "El campo no puede estar vacío.", variant: "destructive" });
         return;
     }
+     if (!currentChatMessage.trim() && (chatStage === 'initial' || chatStage === 'askingEmail')) {
+      toast({ title: "¡Ups!", description: "El campo no puede estar vacío.", variant: "destructive" });
+      return;
+    }
+
 
     const userMessage: ChatMessage = { sender: 'user', text: currentChatMessage };
     setChatMessages(prev => [...prev, userMessage]);
@@ -134,6 +139,14 @@ export function BottomNavBar() {
             setChatStage('readyToMessage');
             break;
         case 'readyToMessage': // User submitted their actual message
+             if (!userName || !userEmail) {
+                // This case should ideally not be reached if flow is correct
+                // but as a safeguard:
+                setChatMessages(prev => [...prev, { sender: 'bot', text: 'Parece que nos saltamos algunos pasos. Empecemos de nuevo. ¿Cómo te llamas?' }]);
+                resetChat(); // Full reset
+                setChatMessages([{ sender: 'bot', text: 'Parece que nos saltamos algunos pasos. Empecemos de nuevo. ¿Cómo te llamas?' }]);
+                return;
+            }
             try {
                 await sendEmail({
                     subject: `Nuevo Mensaje de ${userName} desde PortfoliTok`,
@@ -154,9 +167,9 @@ export function BottomNavBar() {
   const navItems = [
     { href: '/', icon: Home, label: 'Inicio', isActive: pathname === '/' },
     { href: 'https://www.linkedin.com/in/juancruzdillon', icon: Linkedin, label: 'LinkedIn', target: '_blank' },
-    { icon: PlusSquare, label: 'Comment', onClick: () => setIsCommentDialogOpen(true) },
+    { icon: PlusSquare, label: 'Comentar', onClick: () => setIsCommentDialogOpen(true) },
     { icon: MessageCircle, label: 'Inbox', onClick: () => setIsInboxDialogOpen(true) },
-    { href: '/profile', icon: User, label: 'Profile', isActive: pathname === '/profile' },
+    { href: '/profile', icon: User, label: 'Perfil', isActive: pathname === '/profile' },
   ];
 
   let inputPlaceholder = '';
@@ -191,7 +204,7 @@ export function BottomNavBar() {
       <Dialog open={isCommentDialogOpen} onOpenChange={setIsCommentDialogOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Dejame un comentario</DialogTitle>
+            <DialogTitle>Déjame un comentario</DialogTitle>
             <DialogDescription>
               Tu feedback es valioso. Por favor, deja un comentario abajo.
             </DialogDescription>
@@ -310,4 +323,3 @@ export function BottomNavBar() {
     </>
   );
 }
-

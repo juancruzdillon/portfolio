@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'PortfoliTok',
-  description: 'Juan Cruz Dillon - Portfolio',
+  description: 'Juan Cruz Dillon - Portafolio',
 };
 
 export default function RootLayout({

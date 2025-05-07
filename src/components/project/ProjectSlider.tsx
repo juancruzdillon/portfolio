@@ -37,7 +37,7 @@ const ProjectSlideCard: React.FC<{ project: Project }> = ({ project }) => {
       </CardContent>
       <CardFooter className="p-3 sm:p-4 pt-0">
         <Button asChild variant="link" className="p-0 h-auto text-sm text-accent hover:text-accent-foreground/80">
-          <Link href={`/project/${project.id}`}>View Details <ArrowRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4" /></Link>
+          <Link href={`/project/${project.id}`}>Ver Detalles <ArrowRight className="ml-1 w-3 h-3 sm:w-4 sm:h-4" /></Link>
         </Button>
       </CardFooter>
     </Card>
@@ -50,8 +50,8 @@ const ViewMoreSlide: React.FC = () => {
       <Card className="h-full w-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center justify-center bg-primary/80 hover:bg-primary/90 backdrop-blur-sm text-primary-foreground">
         <CardContent className="p-4 text-center">
           <ArrowRight className="w-10 h-10 sm:w-12 sm:h-12 mb-2 sm:mb-3" />
-          <CardTitle className="text-lg sm:text-xl">View All Projects</CardTitle>
-          <p className="text-xs sm:text-sm text-primary-foreground/80 mt-1">Explore my full portfolio</p>
+          <CardTitle className="text-lg sm:text-xl">Ver Todos los Proyectos</CardTitle>
+          <p className="text-xs sm:text-sm text-primary-foreground/80 mt-1">Explora mi portafolio completo</p>
         </CardContent>
       </Card>
     </Link>
@@ -105,14 +105,14 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 transition-opacity duration-300",
+              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card/90 text-foreground hover:text-primary transition-opacity duration-300",
               isAtStart 
                 ? "opacity-30 cursor-not-allowed" 
                 : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
             )}
             onClick={() => navigateSlide('left')}
             disabled={isAtStart}
-            aria-label="Previous project"
+            aria-label="Proyecto anterior"
           >
             <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
           </Button>
@@ -120,14 +120,14 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 transition-opacity duration-300",
+              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card/90 text-foreground hover:text-primary transition-opacity duration-300",
               isAtEnd 
                 ? "opacity-30 cursor-not-allowed" 
                 : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
             )}
             onClick={() => navigateSlide('right')}
             disabled={isAtEnd}
-            aria-label="Next project"
+            aria-label="Siguiente proyecto"
           >
             <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
           </Button>
@@ -138,4 +138,3 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
 };
 
 export default ProjectSlider;
-
