@@ -1,4 +1,3 @@
-
 import type { ProfileData, Project, HomePageSection, Technology } from './types';
 import React from 'react'; // Import React for JSX
 import Image from '@/components/ui/image';
@@ -10,7 +9,8 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Briefcase, MessageSquare, TrendingUp } from 'lucide-react'; // Updated icon import
+import { Briefcase, MessageSquare, TrendingUp } from 'lucide-react';
+import Timeline from '@/components/ui/timeline'; // Import the new Timeline component
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
@@ -71,6 +71,8 @@ export const profileData: ProfileData = {
   projects: projectsData,
 };
 
+// Experience items should be in REVERSE chronological order (newest first)
+// The Timeline component will reverse it for display (oldest first on left)
 const experienceItems = [
   {
     date: "2021 - Present",
@@ -100,14 +102,14 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <div className="w-[150px] h-[150px] mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+          <div className="w-[150px] h-[150px] mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg relative">
             <Image
               src="https://picsum.photos/seed/aboutmeavatar/150/150"
               alt="Juan Cruz Dillon"
-              width={150}
-              height={150}
-              containerClassName="w-full h-full" // Container takes full space of the parent div
-              imgClassName="w-full h-full object-cover" // Image itself covers the container
+              layout="fill" 
+              objectFit="cover"
+              containerClassName="w-full h-full"
+              imgClassName="rounded-full" // Ensure image itself is rounded if container is
               data-ai-hint="profile avatar"
             />
           </div>
@@ -144,24 +146,12 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Experience',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center max-w-6xl mx-auto"> {/* Widened container */}
+        <div className="p-4 text-center max-w-4xl mx-auto w-full flex flex-col items-center">
           <TrendingUp className="mx-auto h-16 w-16 mb-6 text-primary" />
-          <h3 className="text-3xl font-bold mb-10 text-white">Professional Journey</h3>
-          
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 mt-8 justify-center items-stretch"> {/* items-stretch to make cards same height */}
-            {experienceItems.map((item, index) => (
-              <div 
-                key={index} 
-                className="bg-black/40 p-6 rounded-xl shadow-2xl w-full md:w-[30%] backdrop-blur-sm border border-white/10 text-left flex flex-col"
-              >
-                <div> {/* Content wrapper for text alignment */}
-                  <p className="text-xs text-primary/90 font-semibold mb-2 tracking-wider uppercase">{item.date}</p>
-                  <h4 className="text-xl font-bold text-white mb-1">{item.title}</h4>
-                  <p className="text-lg text-white/80 font-medium mb-3">{item.company}</p>
-                  <p className="text-sm text-white/70 leading-relaxed">{item.description}</p>
-                </div>
-              </div>
-            ))}
+          <h3 className="text-3xl font-bold mb-2 text-white">Professional Journey</h3>
+          <p className="text-sm text-white/70 mb-10">Click on the timeline points to see details.</p>
+          <div className="w-full"> {/* Container for the timeline */}
+            <Timeline items={experienceItems} />
           </div>
         </div>
       </React.Fragment>
