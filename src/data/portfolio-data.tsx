@@ -10,11 +10,11 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Briefcase, MessageSquare, TrendingUp, Brain } from 'lucide-react';
+import { Briefcase, MessageSquare, TrendingUp, Brain, Zap, Lightbulb, Award, Code as CodeIcon, MapPin, Sparkles, UserCircle, Target as TargetIcon } from 'lucide-react';
 import Timeline from '@/components/ui/timeline';
 import ProjectSlider from '@/components/project/ProjectSlider';
 import ContactForm from '@/components/contact/ContactForm';
-import MemoTestGame, { gamePairs } from '@/components/game/MemoTestGame'; // Import MemoTestGame and gamePairs
+import MemoTestGame from '@/components/game/MemoTestGame';
 
 
 const technologies: Record<string, Technology> = {
@@ -147,6 +147,16 @@ const experienceItems = [
   }
 ];
 
+// New data for MemoTestGame
+export const memoTestGameData = [
+  { q: "Edad", a: "25", qIcon: UserCircle, aIcon: Award },
+  { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: Sparkles },
+  { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: TargetIcon },
+  { q: "Username", a: "@juancruzdillon", qIcon: Brain, aIcon: Briefcase },
+  { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Lightbulb },
+  { q: "Framework Fav.", a: "Next.js", qIcon: NextjsIcon, aIcon: ReactIcon },
+];
+
 export const homePageSectionsData: HomePageSection[] = [
   {
     id: 'about-me',
@@ -225,7 +235,7 @@ export const homePageSectionsData: HomePageSection[] = [
             <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md">
                 Encuentra los pares correctos y descubre algunos datos sobre mí. ¡Buena suerte!
             </p>
-            <MemoTestGame pairs={gamePairs} />
+            <MemoTestGame pairs={memoTestGameData} />
         </div>
       </React.Fragment>
     ),
@@ -250,3 +260,4 @@ export const homePageSectionsData: HomePageSection[] = [
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
+

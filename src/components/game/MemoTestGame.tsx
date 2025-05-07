@@ -160,13 +160,5 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
   );
 };
 
-export const gamePairs = [
-  { q: "Edad", a: "25", qIcon: Lightbulb, aIcon: Award },
-  { q: "Nacionalidad", a: "Argentina", qIcon: Lightbulb, aIcon: Award },
-  { q: "Especialidad", a: "Front End", qIcon: Lightbulb, aIcon: Code },
-  { q: "Username", a: "@juancruzdillon", qIcon: Lightbulb, aIcon: Brain },
-  { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Code },
-  { q: "Framework Fav.", a: "Next.js", qIcon: Zap, aIcon: Code },
-];
-
 export default MemoTestGame;
+
