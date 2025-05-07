@@ -1,3 +1,4 @@
+
 "use client";
 
 import type React from 'react';
@@ -90,7 +91,10 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
         ) : isViewMoreSlideActive ? (
           <ViewMoreSlide />
         ) : (
-          null
+          // This case should ideally not happen if projectsToShow has items or if it's empty (totalSlides would be 1)
+          // Adding a fallback or ensuring totalSlides is always >= 1 might be good.
+          // For now, if no current project and not view more, it implies no slides, which is handled by totalSlides > 1 for arrows.
+          null 
         )}
       </div>
 
@@ -101,8 +105,10 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-              isAtStart && "opacity-30 cursor-not-allowed"
+              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 transition-opacity duration-300",
+              isAtStart 
+                ? "opacity-30 cursor-not-allowed" 
+                : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
             )}
             onClick={() => navigateSlide('left')}
             disabled={isAtStart}
@@ -114,8 +120,10 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-              isAtEnd && "opacity-30 cursor-not-allowed"
+              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 transition-opacity duration-300",
+              isAtEnd 
+                ? "opacity-30 cursor-not-allowed" 
+                : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
             )}
             onClick={() => navigateSlide('right')}
             disabled={isAtEnd}
@@ -130,3 +138,4 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
 };
 
 export default ProjectSlider;
+
