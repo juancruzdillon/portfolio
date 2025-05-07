@@ -4,6 +4,7 @@ import React from 'react'; // Import React for JSX
 import Image from '@/components/ui/image';
 import ReactIcon from '@/icons/ReactIcon';
 import NextjsIcon from '@/icons/NextjsIcon';
+import VuejsIcon from '@/icons/VuejsIcon';
 import TailwindIcon from '@/icons/TailwindIcon';
 import NodejsIcon from '@/icons/NodejsIcon';
 import JavaScriptIcon from '@/icons/JavaScriptIcon';
@@ -153,12 +154,32 @@ export const memoTestGameData = [
   { q: "Edad", a: "25", qIcon: UserCircle, aIcon: Award },
   { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: Sparkles },
   { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: TargetIcon },
-  { q: "Usuario", a: "@juancruzdillon", qIcon: Brain, aIcon: Briefcase }, // Use Briefcase instead of BriefcaseIcon
+  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Briefcase }, // Use Briefcase instead of BriefcaseIcon
   { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Lightbulb },
-  { q: "Framework Favorito", a: "Next.js", qIcon: NextjsIcon, aIcon: ReactIcon },
+  { q: "Framework más usado", a: "Vue.js", qIcon: Brain, aIcon: VuejsIcon },
 ];
 
 export const homePageSectionsData: HomePageSection[] = [
+  {
+    id: 'my-projects',
+    type: 'projects',
+    title: 'Proyectos',
+    content: (
+      <React.Fragment>
+       <div className="p-4 text-center flex flex-col items-center justify-center h-full">
+        <Briefcase className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Mis Trabajos</h3>
+        <p className="text-base sm:text-lg text-white/90 mb-6">
+          Desliza o usa las flechas para navegar por los proyectos. Haz clic en un proyecto para ver detalles.
+        </p>
+        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+            <ProjectSlider projects={projectsData} />
+        </div>
+      </div>
+      </React.Fragment>
+    ),
+    backgroundImageUrl: 'https://picsum.photos/seed/projectsbg/1080/1920',
+  },
   {
     id: 'about-me',
     type: 'about',
@@ -184,26 +205,6 @@ export const homePageSectionsData: HomePageSection[] = [
       </React.Fragment>
     ),
     backgroundImageUrl: 'https://picsum.photos/seed/aboutmebg/1080/1920',
-  },
-  {
-    id: 'my-projects',
-    type: 'projects',
-    title: 'Proyectos',
-    content: (
-      <React.Fragment>
-       <div className="p-4 text-center flex flex-col items-center justify-center h-full">
-        <Briefcase className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
-        <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Mis Trabajos</h3>
-        <p className="text-base sm:text-lg text-white/90 mb-6">
-          Desliza o usa las flechas para navegar por los proyectos. Haz clic en un proyecto para ver detalles.
-        </p>
-        <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
-            <ProjectSlider projects={projectsData} />
-        </div>
-      </div>
-      </React.Fragment>
-    ),
-    backgroundImageUrl: 'https://picsum.photos/seed/projectsbg/1080/1920',
   },
   {
     id: 'experience',
