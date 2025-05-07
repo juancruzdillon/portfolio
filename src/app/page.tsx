@@ -18,8 +18,8 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
         <NextImage
           src={section.backgroundImageUrl}
           alt={section.title}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={85}
           className="z-0 brightness-50"
           data-ai-hint="abstract background"

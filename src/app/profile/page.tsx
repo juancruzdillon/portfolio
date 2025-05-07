@@ -24,8 +24,8 @@ const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ projec
       <Image
         src={project.imageUrl}
         alt={project.title}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         containerClassName="w-full h-full"
         imgClassName="group-hover:scale-105 transition-transform duration-300"
         data-ai-hint="project thumbnail"

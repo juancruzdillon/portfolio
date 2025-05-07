@@ -22,8 +22,9 @@ const ProjectSlideCard: React.FC<{ project: Project }> = ({ project }) => {
         <NextImage
           src={project.imageUrl}
           alt={project.title}
-          layout="fill"
-          objectFit="cover"
+          fill
+          sizes='sizes'
+          style={{ objectFit: "cover" }}
           className="opacity-80 group-hover:opacity-100 transition-opacity"
           data-ai-hint="project image"
         />

@@ -17,18 +17,13 @@ interface ProjectPageProps {
   };
 }
 
-export async function generateStaticParams() {
-  return projectsData.map((project) => ({
-    id: project.id,
-  }));
-}
-
 const getProject = (id: string): ProjectType | undefined => {
   return projectsData.find((project) => project.id === id);
 };
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProject(params.id);
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { id } = await params;
+  const project = getProject(id);
 
   if (!project) {
     notFound();
@@ -46,10 +41,11 @@ export default function ProjectPage({ params }: ProjectPageProps) {
         <Card className="overflow-hidden shadow-xl">
           <CardHeader className="relative p-0 h-72 md:h-96">
             <Image
+              priority
               src={project.imageUrl}
               alt={project.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: "cover" }}
               className="w-full h-full"
               data-ai-hint="project detail image"
             />
