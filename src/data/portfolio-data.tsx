@@ -10,7 +10,7 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Users, Briefcase, Smile, MessageSquare } from 'lucide-react'; // For generic sections
+import { Users, Briefcase, MessageSquare } from 'lucide-react'; // For generic sections
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
@@ -84,13 +84,12 @@ export const homePageSectionsData: HomePageSection[] = [
             alt="Juan Cruz Dillon"
             width={150}
             height={150}
-            containerClassName="mx-auto mb-6"
+            containerClassName="block mx-auto mb-6" // Ensured block display for centering
             imgClassName="rounded-full border-4 border-primary shadow-lg"
             data-ai-hint="profile photo"
           />
-          <Smile className="mx-auto h-12 w-12 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Hi, I'm Juan Cruz!</h3>
-          <p className="text-lg">
+          <p className="text-lg text-white/90">
             A passionate Front End Developer from Argentina, specializing in creating modern and responsive web applications.
             I love turning complex problems into beautiful, intuitive designs.
           </p>
@@ -108,7 +107,7 @@ export const homePageSectionsData: HomePageSection[] = [
        <div className="p-4 text-center">
         <Briefcase className="mx-auto h-16 w-16 mb-4 text-primary" />
         <h3 className="text-2xl font-semibold mb-2">My Work</h3>
-        <p className="text-lg">
+        <p className="text-lg text-white/90">
           Here are some of the projects I've worked on. Click to see more details!
         </p>
       </div>
@@ -125,7 +124,7 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center">
           <Users className="mx-auto h-16 w-16 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Professional Journey</h3>
-          <ul className="text-lg list-disc list-inside text-left mx-auto max-w-md">
+          <ul className="text-lg list-disc list-inside text-left mx-auto max-w-md text-white/90">
             <li>Frontend Developer at Tech Solutions Inc. (2021-Present)</li>
             <li>Junior Developer at Web Wizards Co. (2019-2021)</li>
             <li>Intern at CodeCrafters (2018)</li>
@@ -144,7 +143,7 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center">
           <MessageSquare className="mx-auto h-16 w-16 mb-4 text-primary" />
           <h3 className="text-2xl font-semibold mb-2">Get In Touch</h3>
-          <p className="text-lg">
+          <p className="text-lg text-white/90">
             Have a project in mind or just want to say hi? Feel free to reach out! You can use the inbox feature below.
           </p>
         </div>
