@@ -1,25 +1,24 @@
-
 "use client";
 import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ImageProps extends Omit<NextImageProps, 'src'> {
-  src?: string; // Make src optional to handle potential undefined cases gracefully
+  src?: string;
   fallbackSrc?: string;
-  alt: string; // Alt is always required
+  alt: string;
   containerClassName?: string;
   imgClassName?: string;
   ['data-ai-hint']?: string;
+  onLoadingComplete?: () => void;       // 1) Aceptar el callback
 }
 
 const Image: React.FC<ImageProps> = ({
   src,
-  fallbackSrc = "https://picsum.photos/seed/fallback/400/300", // Default fallback
+  fallbackSrc = "https://picsum.photos/seed/fallback/400/300",
   alt,
   width,
   height,
-  className,
   containerClassName,
   imgClassName,
   layout,
@@ -31,6 +30,7 @@ const Image: React.FC<ImageProps> = ({
   placeholder,
   blurDataURL,
   "data-ai-hint": dataAiHint,
+  onLoadingComplete,                  // 1) Desestructurar
   ...props
 }) => {
   const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc);
@@ -56,13 +56,12 @@ const Image: React.FC<ImageProps> = ({
   const imageBaseProps = {
     alt,
     onError: handleError,
+    onLoadingComplete,                  // 2) Incluir aquí
     className: cn("transition-opacity duration-300", imgClassName, hasError && src !== fallbackSrc ? "opacity-50" : "opacity-100"),
     ...(dataAiHint && { "data-ai-hint": dataAiHint }),
     ...props,
   };
 
-  // If layout is 'fill', NextImage handles responsiveness.
-  // Otherwise, wrap with a div for aspect ratio if width/height are numbers.
   if (layout === 'fill') {
     return (
       <div className={cn("relative overflow-hidden", containerClassName)}>
@@ -76,16 +75,15 @@ const Image: React.FC<ImageProps> = ({
           unoptimized={unoptimized}
           placeholder={placeholder}
           blurDataURL={blurDataURL}
-          {...imageBaseProps}
+          {...imageBaseProps}            // 3) Propagar el callback
         />
       </div>
     );
   }
 
-  // For fixed or intrinsic, provide width and height
   if ((typeof width === 'number' && typeof height === 'number') || layout === 'intrinsic' || layout === 'fixed') {
      return (
-      <div className={cn("relative", containerClassName)} style={ (typeof width === 'number' && typeof height === 'number' && !layout) ? { aspectRatio: `${width}/${height}` } : {}}>
+      <div className={cn("relative", containerClassName)} style={(typeof width === 'number' && typeof height === 'number' && !layout) ? { aspectRatio: `${width}/${height}` } : {}}>
         <NextImage
           src={currentSrc}
           width={width}
@@ -98,15 +96,12 @@ const Image: React.FC<ImageProps> = ({
           unoptimized={unoptimized}
           placeholder={placeholder}
           blurDataURL={blurDataURL}
-          {...imageBaseProps}
+          {...imageBaseProps}            // 3) Aquí también
         />
       </div>
     );
   }
-  
-  // Fallback for cases where Next/Image might not be ideal or props are missing
-  // This will use a standard img tag
-  // eslint-disable-next-line @next/next/no-img-element
+
   return (
     <div className={cn("relative overflow-hidden", containerClassName)}>
        <img
@@ -117,9 +112,10 @@ const Image: React.FC<ImageProps> = ({
         className={cn(imageBaseProps.className, "w-full h-auto object-cover")}
         style={{
           objectFit: objectFit || 'cover',
-          width: typeof width === 'string' ? width : undefined, // e.g., "100%"
-          height: typeof height === 'string' ? height : undefined, // e.g., "auto"
+          width: typeof width === 'string' ? width : undefined,
+          height: typeof height === 'string' ? height : undefined,
         }}
+        onError={handleError}
         data-ai-hint={dataAiHint}
       />
     </div>

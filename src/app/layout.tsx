@@ -15,8 +15,57 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio | Vue.js | React.js | Programador | Full Stack',
-  description: 'Juan Cruz Dillon - Portafolio',
+  title: {
+    default: 'Portfolio | Juan Cruz Dillon | Front‑End Developer Vue.js & React.js',
+    template: 'Front‑End Developer Vue.js & React.js '
+  },
+  description: 'Portafolio de Juan Cruz Dillon: desarrollador Front‑End especializado en Vue.js, React.js y Full Stack.',
+  keywords: [
+    'Juan Cruz Dillon',
+    'Portafolio',
+    'Front End Developer',
+    'Vue.js',
+    'Vue',
+    'React.js',
+    'React',
+    'Full Stack Developer',
+    'JavaScript',
+    'TypeScript',
+    'Tailwind CSS',
+    'Next.js',
+    'SEO',
+    'Web Developer',
+    'UI/UX'
+  ],
+  authors: [
+    { name: 'Juan Cruz Dillon', url: 'https://www.juancruzdillon.com.ar' }
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true
+  },
+  openGraph: {
+    title: 'Juan Cruz Dillon – Front‑End Developer Vue.js & React.js',
+    description: 'Portafolio de Juan Cruz Dillon: proyectos y habilidades en Vue.js, React.js, JavaScript, TypeScript y más.',
+    url: 'https://www.juancruzdillon.com.ar',
+    siteName: 'Portfolio Juan Cruz Dillon',
+    images: [
+      {
+        url: 'https://www.juancruzdillon.com.ar/assets/perfil.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Portafolio de Juan Cruz Dillon'
+      }
+    ],
+    locale: 'es_AR',
+    type: 'website'
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png'
+  }
 };
 
 export default function RootLayout({
