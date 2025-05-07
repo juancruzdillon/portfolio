@@ -100,14 +100,14 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <div className="w-[150px] h-[150px] mx-auto mb-6">
+          <div className="w-[150px] h-[150px] mx-auto mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg">
             <Image
               src="https://picsum.photos/seed/aboutmeavatar/150/150"
               alt="Juan Cruz Dillon"
               width={150}
               height={150}
-              containerClassName="w-full h-full"
-              imgClassName="w-full h-full object-cover rounded-full border-4 border-primary shadow-lg"
+              containerClassName="w-full h-full" // Container takes full space of the parent div
+              imgClassName="w-full h-full object-cover" // Image itself covers the container
               data-ai-hint="profile avatar"
             />
           </div>
@@ -144,31 +144,24 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Experience',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center max-w-2xl mx-auto"> {/* Increased max-width for more space */}
+        <div className="p-4 text-center max-w-6xl mx-auto"> {/* Widened container */}
           <TrendingUp className="mx-auto h-16 w-16 mb-6 text-primary" />
-          <h3 className="text-3xl font-bold mb-10 text-white">Professional Journey</h3> {/* Increased margin-bottom */}
+          <h3 className="text-3xl font-bold mb-10 text-white">Professional Journey</h3>
           
-          <div className="relative py-2"> {/* Container for the line and items */}
-            {/* Vertical Timeline Bar: Centered using left-6 and -translate-x-1/2 */}
-            <div className="absolute left-6 top-2 bottom-2 w-1 bg-primary/50 rounded-full transform -translate-x-1/2"></div>
-
-            {/* Experience Items Container */}
-            <div className="space-y-12"> {/* Increased spacing between items */}
-              {experienceItems.map((item, index) => (
-                <div key={index} className="relative pl-12 text-left"> {/* pl-12 to make space for dot and line on the left */}
-                  {/* Timeline Dot: Centered on the line bar */}
-                  <div className="absolute left-6 top-1 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-xl transform -translate-x-1/2"></div>
-                  
-                  {/* Content of the experience item */}
-                  <div>
-                    <p className="text-sm text-primary font-bold mb-1 tracking-wide">{item.date}</p>
-                    <h4 className="text-2xl font-semibold text-white mb-1">{item.title}</h4>
-                    <p className="text-lg text-white/90 font-medium mb-2">{item.company}</p>
-                    <p className="text-base text-white/80 leading-relaxed">{item.description}</p>
-                  </div>
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 mt-8 justify-center items-stretch"> {/* items-stretch to make cards same height */}
+            {experienceItems.map((item, index) => (
+              <div 
+                key={index} 
+                className="bg-black/40 p-6 rounded-xl shadow-2xl w-full md:w-[30%] backdrop-blur-sm border border-white/10 text-left flex flex-col"
+              >
+                <div> {/* Content wrapper for text alignment */}
+                  <p className="text-xs text-primary/90 font-semibold mb-2 tracking-wider uppercase">{item.date}</p>
+                  <h4 className="text-xl font-bold text-white mb-1">{item.title}</h4>
+                  <p className="text-lg text-white/80 font-medium mb-3">{item.company}</p>
+                  <p className="text-sm text-white/70 leading-relaxed">{item.description}</p>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </React.Fragment>
