@@ -18,7 +18,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-// import { Label } from '@/components/ui/label'; // No longer used in new chat
 import { useToast } from '@/hooks/use-toast';
 import { sendEmail } from '@/services/email';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -94,19 +93,19 @@ export function BottomNavBar() {
 
   const handleCommentSubmit = async () => {
     if (!comment.trim()) {
-      toast({ title: "Oops!", description: "Comment cannot be empty.", variant: "destructive" });
+      toast({ title: "Oops!", description: "El comentario no puede estar vacío.", variant: "destructive" });
       return;
     }
     console.log("Comment submitted:", comment);
     // Here you would typically send the comment to a backend service
     // For now, we'll just show a success toast
-    toast({ title: "Success!", description: "Thank you for your comment!" });
+    toast({ title: "¡Éxito!", description: "¡Gracias por tu comentario!" });
     setComment('');
     setIsCommentDialogOpen(false);
   };
 
-  const handleChatSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleChatSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!currentChatMessage.trim() && chatStage !== 'messageSent') {
         toast({ title: "Oops!", description: "El campo no puede estar vacío.", variant: "destructive" });
         return;
@@ -194,21 +193,28 @@ export function BottomNavBar() {
           <DialogHeader>
             <DialogTitle>Dejame un comentario</DialogTitle>
             <DialogDescription>
-              Your feedback is valuable. Please leave a comment below.
+              Tu feedback es valioso. Por favor, deja un comentario abajo.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
+          <div className="grid gap-2 py-4">
             <Textarea
               id="comment"
-              placeholder="Type your comment here..."
+              placeholder="Escribe tu comentario aquí..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               className="min-h-[100px]"
+              onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                  e.preventDefault();
+                  handleCommentSubmit();
+                }
+              }}
             />
+            <p className="text-xs text-muted-foreground">Presiona Ctrl + Enter para enviar el comentario.</p>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setIsCommentDialogOpen(false)}>Cancel</Button>
-            <Button type="submit" onClick={handleCommentSubmit}>Submit Comment</Button>
+            <Button type="button" variant="outline" onClick={() => setIsCommentDialogOpen(false)}>Cancelar</Button>
+            <Button type="submit" onClick={handleCommentSubmit}>Enviar Comentario</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -216,7 +222,7 @@ export function BottomNavBar() {
       {/* Inbox Dialog (Chat Flow) */}
       <Dialog open={isInboxDialogOpen} onOpenChange={(open) => {
           setIsInboxDialogOpen(open);
-          if (open) { // Only reset if opening, not on close by itself
+          if (open) { 
             resetChat();
           }
         }}>
@@ -260,28 +266,34 @@ export function BottomNavBar() {
             </div>
           </ScrollArea>
 
-          <form onSubmit={handleChatSubmit} className="mt-auto pt-2 space-y-2">
+          <form onSubmit={handleChatSubmit} className="mt-auto pt-2 space-y-1">
             {chatStage !== 'messageSent' && (
-              <InputComponent
-                id="chatInput"
-                placeholder={inputPlaceholder}
-                value={currentChatMessage}
-                onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setCurrentChatMessage(e.target.value)}
-                required
-                autoFocus
-                className={cn(
-                    "w-full",
-                    chatStage === 'readyToMessage' ? "min-h-[70px] resize-none" : "h-10"
-                )}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-                  if (e.key === 'Enter' && !e.shiftKey && chatStage !== 'readyToMessage') {
-                    e.preventDefault();
-                    handleChatSubmit(e as any); // Cast to any to satisfy FormEvent requirement simply
-                  }
-                }}
-              />
+              <>
+                <InputComponent
+                  id="chatInput"
+                  placeholder={inputPlaceholder}
+                  value={currentChatMessage}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setCurrentChatMessage(e.target.value)}
+                  required
+                  autoFocus
+                  className={cn(
+                      "w-full",
+                      chatStage === 'readyToMessage' ? "min-h-[70px] resize-none" : "h-10"
+                  )}
+                  onKeyDown={(e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                      e.preventDefault();
+                      handleChatSubmit(e as any);
+                    } else if (e.key === 'Enter' && !e.shiftKey && InputComponent !== Textarea) {
+                      e.preventDefault();
+                      handleChatSubmit(e as any);
+                    }
+                  }}
+                />
+                <p className="text-xs text-muted-foreground">Presiona Ctrl + Enter para enviar.</p>
+              </>
             )}
-            <DialogFooter className="pt-0 sm:justify-between">
+            <DialogFooter className="pt-2 sm:justify-between"> {/* Adjusted pt for spacing */}
                 <Button type="button" variant="outline" onClick={() => setIsInboxDialogOpen(false)}>
                     {chatStage === 'messageSent' ? 'Cerrar' : 'Cancelar'}
                 </Button>
@@ -298,3 +310,4 @@ export function BottomNavBar() {
     </>
   );
 }
+
