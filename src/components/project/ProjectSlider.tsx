@@ -90,11 +90,6 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
         ) : isViewMoreSlideActive ? (
           <ViewMoreSlide />
         ) : (
-          // Fallback for no projects and not "View More" (e.g., if projectsToShow is empty, currentIndex is 0, isViewMoreSlideActive is true)
-          // This case should ideally be handled by ViewMoreSlide if projectsToShow is empty.
-          // If projectsToShow is empty, currentIndex is 0, projectsToShow.length is 0. So isViewMoreSlideActive = true.
-          // totalSlides will be 1. isAtStart and isAtEnd will be true. Arrows won't show.
-          // This means if no projects, it will show ViewMoreSlide correctly.
           null
         )}
       </div>
@@ -106,7 +101,7 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              "absolute left-0 sm:left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
               isAtStart && "opacity-30 cursor-not-allowed"
             )}
             onClick={() => navigateSlide('left')}
@@ -119,7 +114,7 @@ const ProjectSlider: React.FC<ProjectSliderProps> = ({ projects }) => {
             variant="outline"
             size="icon"
             className={cn(
-              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 hover:bg-card text-card-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+              "absolute right-0 sm:right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-card/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
               isAtEnd && "opacity-30 cursor-not-allowed"
             )}
             onClick={() => navigateSlide('right')}
