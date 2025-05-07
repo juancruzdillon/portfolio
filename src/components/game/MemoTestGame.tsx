@@ -1,12 +1,14 @@
 
 "use client";
 
-import type React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Zap, Brain, Puzzle, Lightbulb, Award, Code } from 'lucide-react'; // Added some icons
+import { Zap, Brain, Puzzle, Lightbulb, Award, Code, UserCircle, MapPin, Sparkles, Target as TargetIcon, Briefcase as BriefcaseIcon } from 'lucide-react';
+import NextjsIcon from '@/icons/NextjsIcon';
+import ReactIcon from '@/icons/ReactIcon';
+import Confetti from 'react-confetti';
 
 interface MemoCard {
   id: string;
@@ -38,6 +40,20 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
   const [isInteractionDisabled, setIsInteractionDisabled] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
 
+  useEffect(() => {
+    const styleId = 'memo-test-game-styles';
+    if (!document.getElementById(styleId) && typeof document !== 'undefined') {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.innerHTML = `
+        .transform-style-preserve-3d { transform-style: preserve-3d; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
   const initializeGame = useCallback(() => {
     const gameCards: MemoCard[] = [];
     pairs.forEach((pair, index) => {
@@ -61,22 +77,6 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
       setIsGameWon(true);
     }
   }, [matchedPairIds, pairs.length]);
-
-  // Apply styles on client-side only
-  useEffect(() => {
-    const styleId = 'memo-test-game-styles';
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.innerHTML = `
-        .transform-style-preserve-3d { transform-style: preserve-3d; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-      `;
-      document.head.appendChild(style);
-    }
-  }, []);
-
 
   const handleCardClick = (index: number) => {
     if (isInteractionDisabled || cards[index].isFlipped || cards[index].isMatched || isGameWon) {
@@ -107,7 +107,7 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
       } else {
         setTimeout(() => {
           setCards(prevCards => prevCards.map((card, i) =>
-            newFlippedIndices.includes(i) ? { ...card, isFlipped: false } : card
+            (newFlippedIndices.includes(i) && !card.isMatched) ? { ...card, isFlipped: false } : card
           ));
           setFlippedIndices([]);
           setIsInteractionDisabled(false);
@@ -122,26 +122,35 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
 
   return (
     <div className="flex flex-col items-center w-full">
+      {isGameWon && (
+        <Confetti
+          width={typeof window !== 'undefined' ? window.innerWidth : 300}
+          height={typeof window !== 'undefined' ? window.innerHeight : 300}
+          recycle={false}
+          numberOfPieces={300}
+          tweenDuration={8000}
+        />
+      )}
       <div className="mb-4 text-center">
         <p className="text-lg text-white/90">Movimientos: {moves}</p>
         {isGameWon && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste!</p>}
       </div>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 max-w-md mx-auto">
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-md mx-auto">
         {cards.map((card, index) => (
           <Card
             key={card.id}
             onClick={() => handleCardClick(index)}
             className={cn(
-              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md hover:shadow-lg",
+              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md hover:shadow-lg min-w-[80px] min-h-[80px] sm:min-w-[90px] sm:min-h-[90px]",
               card.isFlipped ? "bg-card text-card-foreground rotate-y-180" : "bg-primary text-primary-foreground",
               card.isMatched ? "opacity-60 cursor-not-allowed border-2 border-green-500" : "hover:scale-105",
               (isInteractionDisabled || isGameWon) && !card.isMatched && !card.isFlipped ? "cursor-not-allowed" : ""
             )}
           >
-            <div className={cn("text-center backface-hidden", card.isFlipped ? "rotate-y-180" : "")}>
+            <div className={cn("text-center backface-hidden w-full h-full flex flex-col items-center justify-center", card.isFlipped ? "rotate-y-180" : "")}>
               {card.isFlipped ? (
                 <>
-                  {card.Icon && <card.Icon className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1" />}
+                  {card.Icon && <card.Icon className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 text-primary" />}
                   <span className="text-xs sm:text-sm font-medium break-words">{card.value}</span>
                 </>
               ) : (
@@ -161,4 +170,3 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
 };
 
 export default MemoTestGame;
-
