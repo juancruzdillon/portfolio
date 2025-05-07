@@ -99,24 +99,12 @@ export default function ProfilePage() {
         </header>
 
         <Tabs defaultValue="grid" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
+          <TabsList className="grid w-full grid-cols-1 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
             <TabsTrigger 
               value="grid" 
               className="py-3 -mb-px border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
             >
               <LayoutGrid className="h-5 w-5" />
-            </TabsTrigger>
-            <TabsTrigger 
-              value="videos" 
-              className="py-3 -mb-px border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
-            >
-              <Clapperboard className="h-5 w-5" />
-            </TabsTrigger>
-            <TabsTrigger 
-              value="liked" 
-              className="py-3 -mb-px border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
-            >
-              <Heart className="h-5 w-5" />
             </TabsTrigger>
           </TabsList>
           
@@ -130,12 +118,6 @@ export default function ProfilePage() {
             ) : (
               <p className="text-center text-muted-foreground py-10">No projects to display.</p>
             )}
-          </TabsContent>
-          <TabsContent value="videos" className="py-10 text-center text-muted-foreground bg-background">
-            Contenido de videos no disponible.
-          </TabsContent>
-          <TabsContent value="liked" className="py-10 text-center text-muted-foreground bg-background">
-            Contenido de me gusta no disponible.
           </TabsContent>
         </Tabs>
 
