@@ -71,6 +71,27 @@ export const profileData: ProfileData = {
   projects: projectsData,
 };
 
+const experienceItems = [
+  {
+    date: "2021 - Present",
+    title: "Frontend Developer",
+    company: "Tech Solutions Inc.",
+    description: "Spearheading the development of dynamic user interfaces and enhancing application performance with modern frameworks. Collaborating with UI/UX teams to translate designs into responsive, high-quality code."
+  },
+  {
+    date: "2019 - 2021",
+    title: "Junior Developer",
+    company: "Web Wizards Co.",
+    description: "Contributed to diverse web development projects, focusing on front-end and back-end tasks. Gained foundational experience in agile methodologies and version control systems."
+  },
+  {
+    date: "2018",
+    title: "Intern",
+    company: "CodeCrafters",
+    description: "Assisted senior developers in various stages of the software development lifecycle. Focused on learning web technologies and contributing to internal tools."
+  }
+];
+
 export const homePageSectionsData: HomePageSection[] = [
   {
     id: 'about-me',
@@ -79,15 +100,17 @@ export const homePageSectionsData: HomePageSection[] = [
     content: (
       <React.Fragment>
         <div className="p-4 text-center">
-          <Image
-            src="https://picsum.photos/seed/aboutmeavatar/150/150"
-            alt="Juan Cruz Dillon"
-            width={150}
-            height={150}
-            containerClassName="mb-6 mx-auto w-[150px] h-[150px]"
-            imgClassName="w-full h-full object-cover rounded-full border-4 border-primary shadow-lg"
-            data-ai-hint="profile avatar"
-          />
+          <div className="w-[150px] h-[150px] mx-auto mb-6">
+            <Image
+              src="https://picsum.photos/seed/aboutmeavatar/150/150"
+              alt="Juan Cruz Dillon"
+              width={150}
+              height={150}
+              containerClassName="w-full h-full"
+              imgClassName="w-full h-full object-cover rounded-full border-4 border-primary shadow-lg"
+              data-ai-hint="profile avatar"
+            />
+          </div>
           <h3 className="text-2xl font-semibold mb-2 text-white">Hi, I'm Juan Cruz!</h3>
           <p className="text-lg text-white/90">
             A passionate Front End Developer from Argentina, specializing in creating modern and responsive web applications.
@@ -121,42 +144,31 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Experience',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center max-w-lg mx-auto">
+        <div className="p-4 text-center max-w-2xl mx-auto"> {/* Increased max-width for more space */}
           <TrendingUp className="mx-auto h-16 w-16 mb-6 text-primary" />
-          <h3 className="text-3xl font-bold mb-8 text-white">Professional Journey</h3>
+          <h3 className="text-3xl font-bold mb-10 text-white">Professional Journey</h3> {/* Increased margin-bottom */}
           
-          <div className="space-y-10 text-left"> {/* Increased space-y for more separation */}
-            
-            {/* Experience 1 */}
-            <div className="relative pl-10"> {/* Increased padding for the "line" and dot */}
-              <div className="absolute left-1 top-0 w-1.5 h-full bg-primary/30 rounded-full"></div> {/* Thicker, less opaque line */}
-              <div className="absolute left-[-0.125rem] top-1 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-lg"></div> {/* Larger dot, border-card for contrast with dark overlay */}
-              <p className="text-md text-primary font-semibold mb-1">2021 - Present</p>
-              <h4 className="text-2xl font-semibold text-white mb-1">Frontend Developer</h4>
-              <p className="text-lg text-white/80 mb-1">Tech Solutions Inc.</p>
-              <p className="text-sm text-white/70 leading-relaxed">Spearheading the development of dynamic user interfaces and enhancing application performance with modern frameworks. Collaborating with UI/UX teams to translate designs into responsive, high-quality code.</p>
-            </div>
+          <div className="relative py-2"> {/* Container for the line and items */}
+            {/* Vertical Timeline Bar: Centered using left-6 and -translate-x-1/2 */}
+            <div className="absolute left-6 top-2 bottom-2 w-1 bg-primary/50 rounded-full transform -translate-x-1/2"></div>
 
-            {/* Experience 2 */}
-            <div className="relative pl-10">
-              <div className="absolute left-1 top-0 w-1.5 h-full bg-primary/30 rounded-full"></div>
-              <div className="absolute left-[-0.125rem] top-1 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-lg"></div>
-              <p className="text-md text-primary font-semibold mb-1">2019 - 2021</p>
-              <h4 className="text-2xl font-semibold text-white mb-1">Junior Developer</h4>
-              <p className="text-lg text-white/80 mb-1">Web Wizards Co.</p>
-              <p className="text-sm text-white/70 leading-relaxed">Contributed to diverse web development projects, focusing on front-end and back-end tasks. Gained foundational experience in agile methodologies and version control systems.</p>
+            {/* Experience Items Container */}
+            <div className="space-y-12"> {/* Increased spacing between items */}
+              {experienceItems.map((item, index) => (
+                <div key={index} className="relative pl-12 text-left"> {/* pl-12 to make space for dot and line on the left */}
+                  {/* Timeline Dot: Centered on the line bar */}
+                  <div className="absolute left-6 top-1 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-xl transform -translate-x-1/2"></div>
+                  
+                  {/* Content of the experience item */}
+                  <div>
+                    <p className="text-sm text-primary font-bold mb-1 tracking-wide">{item.date}</p>
+                    <h4 className="text-2xl font-semibold text-white mb-1">{item.title}</h4>
+                    <p className="text-lg text-white/90 font-medium mb-2">{item.company}</p>
+                    <p className="text-base text-white/80 leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-
-            {/* Experience 3 */}
-            <div className="relative pl-10">
-              <div className="absolute left-1 top-0 w-1.5 h-16 bg-primary/30 rounded-full"></div> {/* Shorter line for the last item */}
-              <div className="absolute left-[-0.125rem] top-1 w-5 h-5 bg-primary rounded-full border-4 border-card shadow-lg"></div>
-              <p className="text-md text-primary font-semibold mb-1">2018</p>
-              <h4 className="text-2xl font-semibold text-white mb-1">Intern</h4>
-              <p className="text-lg text-white/80 mb-1">CodeCrafters</p>
-              <p className="text-sm text-white/70 leading-relaxed">Assisted senior developers in various stages of the software development lifecycle. Focused on learning web technologies and contributing to internal tools.</p>
-            </div>
-
           </div>
         </div>
       </React.Fragment>
