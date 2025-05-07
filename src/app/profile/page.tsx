@@ -72,16 +72,16 @@ export default function ProfilePage() {
 
           <div className="flex space-x-4 sm:space-x-6 my-3 text-sm">
             <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.following}</p>
-              <p className="text-xs text-muted-foreground">Siguiendo</p>
+              <p className="font-semibold text-foreground">{stats.age}</p>
+              <p className="text-xs text-muted-foreground">Edad</p>
             </div>
             <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.followers}</p>
-              <p className="text-xs text-muted-foreground">Seguidores</p>
+              <p className="font-semibold text-foreground">{stats.nationality}</p>
+              <p className="text-xs text-muted-foreground">Nacionalidad</p>
             </div>
             <div className="text-center">
-              <p className="font-semibold text-foreground">{stats.likes}</p>
-              <p className="text-xs text-muted-foreground">Me gusta</p>
+              <p className="font-semibold text-foreground">{stats.specialty}</p>
+              <p className="text-xs text-muted-foreground">Posición</p>
             </div>
           </div>
 
@@ -91,24 +91,21 @@ export default function ProfilePage() {
 
           <div className="flex space-x-2">
             <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 text-sm">Seguir</Button>
-            <Button variant="outline" size="icon" className="border-border text-muted-foreground">
-              <ChevronDown className="h-5 w-5" />
-            </Button>
              {/* Placeholder for other buttons like Instagram icon if needed */}
           </div>
         </header>
 
         <Tabs defaultValue="grid" className="w-full">
-          <TabsList className="grid w-full grid-cols-1 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
+          <TabsList className="grid p-0 w-full grid-cols-1 bg-card border-b border-border rounded-none sticky top-0 z-20 sm:static">
             <TabsTrigger 
               value="grid" 
-              className="py-3 -mb-px border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
+              className="py-3 border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none"
             >
               <LayoutGrid className="h-5 w-5" />
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="grid" className="pt-0.5 bg-background"> {/* Slight padding for separation */}
+          <TabsContent value="grid" className="mt-5 pt-0.5 bg-background"> {/* Slight padding for separation */}
             {projects.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-0.5"> {/* Minimal gap for TikTok style */}
                 {projects.map((project, index) => (

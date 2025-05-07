@@ -30,18 +30,14 @@ export interface ProfileData {
     age?: number; // Made optional as it's not in the new design
     nationality?: string; // Made optional
     specialty?: string; // Made optional
-    following: number | string; // New: e.g., 120 or "120"
-    followers: string; // New: e.g., "1.5M"
-    likes: string; // New: e.g., "10.2M"
   };
   projects: Project[];
 }
 
 export interface HomePageSection {
   id: string;
-  type: 'about' | 'projects' | 'experience' | 'contact';
+  type: 'about' | 'projects' | 'experience' | 'contact' | 'game';
   title: string;
   content?: React.ReactNode; // For more complex content rendering
   backgroundImageUrl?: string; // Optional background for the section "video"
 }
-

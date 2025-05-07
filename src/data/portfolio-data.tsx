@@ -10,10 +10,12 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Briefcase, MessageSquare, TrendingUp } from 'lucide-react';
-import Timeline from '@/components/ui/timeline'; // Import the new Timeline component
-import ProjectSlider from '@/components/project/ProjectSlider'; // Import the new ProjectSlider component
-import ContactForm from '@/components/contact/ContactForm'; // Import the new ContactForm component
+import { Briefcase, MessageSquare, TrendingUp, Brain } from 'lucide-react';
+import Timeline from '@/components/ui/timeline';
+import ProjectSlider from '@/components/project/ProjectSlider';
+import ContactForm from '@/components/contact/ContactForm';
+import MemoTestGame, { gamePairs } from '@/components/game/MemoTestGame'; // Import MemoTestGame and gamePairs
+
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
@@ -115,13 +117,9 @@ export const profileData: ProfileData = {
   avatarUrl: 'https://picsum.photos/seed/profileavatar/200/200',
   bio: 'Passionate Front End Developer 👨‍💻 | Turning ideas into interactive digital experiences ✨ | React, Next.js, Tailwind CSS enthusiast 🚀 | Argentina 🇦🇷',
   stats: {
-    following: 135,
-    followers: '204.1K',
-    likes: '11.7M',
-    // Optional, can remove if not used:
-    // age: 25, 
-    // nationality: 'Argentina',
-    // specialty: 'Front End',
+    age: 25,
+    nationality: 'Argentina',
+    specialty: 'Front End',
   },
   projects: projectsData,
 };
@@ -215,6 +213,24 @@ export const homePageSectionsData: HomePageSection[] = [
     ),
     backgroundImageUrl: 'https://picsum.photos/seed/experiencebg/1080/1920',
   },
+  {
+    id: 'memo-test-game',
+    type: 'game',
+    title: 'Ahora cuánto sabes de mí?',
+    content: (
+      <React.Fragment>
+        <div className="p-4 text-center w-full max-w-2xl mx-auto flex flex-col items-center justify-center h-full">
+            <Brain className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
+            <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Pon a prueba tu memoria</h3>
+            <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md">
+                Encuentra los pares correctos y descubre algunos datos sobre mí. ¡Buena suerte!
+            </p>
+            <MemoTestGame pairs={gamePairs} />
+        </div>
+      </React.Fragment>
+    ),
+    backgroundImageUrl: 'https://picsum.photos/seed/memogamebg/1080/1920',
+    },
    {
     id: 'contact-me-section',
     type: 'contact',
@@ -234,4 +250,3 @@ export const homePageSectionsData: HomePageSection[] = [
     backgroundImageUrl: 'https://picsum.photos/seed/contactbg/1080/1920',
   },
 ];
-
