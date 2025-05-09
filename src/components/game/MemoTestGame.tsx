@@ -139,7 +139,7 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
             key={card.id}
             onClick={() => handleCardClick(index)}
             className={cn(
-              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md min-w-[80px] min-h-[80px] sm:min-w-[90px] sm:min-h-[90px]",
+              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md min-w-[60px] min-h-[60px] sm:min-w-[90px] sm:min-h-[90px]",
               card.isFlipped ? "bg-card text-card-foreground rotate-y-180" : "bg-primary text-primary-foreground",
               card.isMatched ? "opacity-100 cursor-not-allowed border-2 border-green-500" : "",
               (isInteractionDisabled || isGameWon) && !card.isMatched && !card.isFlipped ? "cursor-not-allowed" : ""

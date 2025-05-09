@@ -80,8 +80,7 @@ export default function ProfilePage() {
   const [avatarLoaded, setAvatarLoaded] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background md:pl-20">
-      <main className="flex-grow container mx-auto px-0 sm:px-4 pt-4 md:pt-6 pb-20 md:pb-8">
+    <div className="flex-grow container mx-auto px-0 sm:px-4 pt-4 md:pt-6 pb-20 md:pb-8 md:pl-20" style={{ paddingBottom: 'calc(5rem + 1.25rem)' }}> {/* Adjusted padding-bottom for mobile nav bar and added md:pl-20 */}
         <header className="relative flex flex-col items-center text-center p-4 mb-6 overflow-hidden rounded-lg">
           <div className="relative z-10 flex flex-col items-center pt-8 pb-4">
             {/* Skeleton avatar */}
@@ -167,11 +166,11 @@ export default function ProfilePage() {
             )}
           </TabsContent>
         </Tabs>
-      </main>
 
-      <div className="md:pl-20">
+      {/* BottomNavBar is rendered in layout.tsx */}
+      {/* <div className="md:pl-20">
         <BottomNavBar />
-      </div>
+      </div> */}
     </div>
   );
 }

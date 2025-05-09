@@ -53,7 +53,7 @@ export const profileData: ProfileData = {
   name: 'Juan Cruz Dillon',
   username: 'juancruzdillon',
   avatarUrl: 'https://media.licdn.com/dms/image/v2/D4D03AQGxAsHBbE6B9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1679889620223?e=1752105600&v=beta&t=OarOcWN5hoHL02qrZEtI5XZtTNy0yM8Pwivy8h_OtGY',
-  bio: 'Desarrollador Front End Apasionado 👨‍💻 | Convierto ideas en experiencias digitales interactivas ✨ | Entusiasta de React, Next.js, Tailwind CSS 🚀 | Argentina 🇦🇷',
+  bio: 'Desarrollador Front End 👨‍💻 | Me encanta convertir ideas en apps que realmente se sientan 🔥 | Soy fan de Vue 🚀 | Desde Argentina 🇦🇷',
   stats: {
     age: 25,
     nationality: 'Argentina',
@@ -68,21 +68,23 @@ export const profileData: ProfileData = {
 const experienceItems = [
   {
     date: "2021 - Actualidad",
-    title: "Desarrollador Frontend",
-    company: "Tech Solutions Inc.",
-    description: "Liderando el desarrollo de interfaces de usuario dinámicas y mejorando el rendimiento de las aplicaciones con frameworks modernos. Colaborando con equipos de UI/UX para traducir diseños en código responsivo y de alta calidad."
+    title: "Front-End Developer Ssr.",
+    company: "Telecentro",
+    description: "Encargado de la integración de apps para Smart TVs, optimicé despliegues y performance en el ecosistema TPlay, y me consolidé como referente del equipo en desarrollo y adaptación para smart tvs."
   },
   {
-    date: "2019 - 2021",
-    title: "Desarrollador Junior",
-    company: "Web Wizards Co.",
-    description: "Contribuí en diversos proyectos de desarrollo web, enfocándome en tareas de front-end y back-end. Adquirí experiencia fundamental en metodologías ágiles y sistemas de control de versiones."
+    date: "2020 - 2021",
+    title: "Full Stack Developer Jr.",
+    company: "ORT Argentina",
+    description: "Colaboré en la mejora de sistemas internos de gestión con PHP-ASP Classic y SQL Server, automatizando tareas y reduciendo errores. Unifiqué datos con SSIS ETL y trabajé con RRHH y Finanzas para implementar soluciones a medida.",
   },
   {
-    date: "2018",
-    title: "Pasante",
-    company: "CodeCrafters",
-    description: "Asistí a desarrolladores senior en diversas etapas del ciclo de vida del desarrollo de software. Me enfoqué en aprender tecnologías web y contribuir a herramientas internas."
+    date: "2019-2020",
+    title: "CRM Software Developer",
+    company: "BGlobal",
+    description: `
+    Desarrollé e implementé un sistema CRM desde cero utilizando BPM Online (Low Code) y .NET MVC, digitalizando procesos comerciales manuales. Integré la solución con WebAPI y SQL Server, migré los datos del cliente a la nueva plataforma y brindé soporte técnico y evolutivo, resolviendo incidentes críticos de forma ágil.
+    `
   }
 ];
 
@@ -135,8 +137,7 @@ export const homePageSectionsData: HomePageSection[] = [
           />
           <h3 className="text-2xl font-semibold mb-2 text-white">¡Hola, soy Juan Cruz!</h3>
           <p className="text-lg text-white/90">
-            Un Desarrollador Front End apasionado de Argentina, especializado en crear aplicaciones web modernas y responsivas.
-            Me encanta convertir problemas complejos en diseños hermosos e intuitivos.
+            Soy un desarrollador nacido en argentina, apasionado por crear aplicaciones de todo tipo. Me gusta transformar desafíos en experiencias visuales, atractivas e intuitivas.
           </p>
         </div>
       </React.Fragment>
@@ -186,11 +187,11 @@ export const homePageSectionsData: HomePageSection[] = [
     title: 'Contáctame',
     content: (
       <React.Fragment>
-        <div className="p-4 text-center w-full max-w-md mx-auto">
+        <div className="flex flex flex-col h-75 text-center w-full max-w-md mx-auto">
           <MessageSquare className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
-          <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Ponte en Contacto</h3>
+          <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Ponete en Contacto</h3>
           <p className="text-base sm:text-lg text-white/90 mb-6">
-            ¿Tienes un proyecto en mente o solo quieres saludar? Completa el formulario a continuación o usa la función de inbox.
+          Si querés contactarme llená este formulario y pronto me voy a comunicar con vos 😀
           </p>
           <ContactForm />
         </div>

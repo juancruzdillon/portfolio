@@ -108,8 +108,22 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
+
 }
 
 @keyframes shimmer {
   100% { transform: translateX(100%); }
+}
+
+/* Styles for homepage sections container */
+@media (max-width: 767px) {
+  .homepage-sections-container {
+    height: calc(100vh - 4rem); /* Account for mobile bottom nav bar */
+  }
+}
+
+@media (min-width: 768px) {
+  .homepage-sections-container {
+    height: 100%; /* For desktop, take full height of its parent (<main>) */
+  }
 }

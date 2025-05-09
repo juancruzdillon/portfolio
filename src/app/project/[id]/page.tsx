@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="flex flex-col min-h-screen bg-background md:pl-20"> {/* Padding for desktop sidebar */}
-      <main className="flex-grow container mx-auto px-4 py-8 pt-10 md:pt-8 pb-24 md:pb-8"> {/* Padding for nav bars */}
+      <div className="flex-grow container mx-auto px-4 py-8 pt-10 md:pt-8 pb-24 md:pb-8" style={{ paddingBottom: '4rem' }}> {/* Padding for nav bars and mobile bottom nav */}
         <Button asChild variant="outline" className="mb-8">
           <Link href="/profile#projects">
             <ArrowLeft className="mr-2 h-4 w-4" /> Volver a Proyectos
@@ -114,7 +114,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </CardContent>
         </Card>
-      </main>
+      </div>
       <BottomNavBar />
     </div>
   );
