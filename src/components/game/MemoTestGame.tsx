@@ -4,9 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { Zap, Brain, Puzzle, Lightbulb, Award, Code, UserCircle, MapPin, Sparkles, Target as TargetIcon, Briefcase as BriefcaseIcon } from 'lucide-react';
-import NextjsIcon from '@/icons/NextjsIcon';
-import ReactIcon from '@/icons/ReactIcon';
+import { Puzzle, Target as TargetIcon, Briefcase as BriefcaseIcon } from 'lucide-react';
 import Confetti from 'react-confetti';
 
 interface MemoCard {
@@ -132,7 +130,8 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
       )}
       <div className="mb-4 text-center">
         <p className="text-lg text-white/90">Movimientos: {moves}</p>
-        {isGameWon && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste!</p>}
+        {isGameWon && moves <= 20 && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste!</p>}
+        {isGameWon && moves > 20 && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste! Pero costo ja...</p>}
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-md mx-auto">
         {cards.map((card, index) => (
@@ -159,6 +158,7 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
           </Card>
         ))}
       </div>
+      {!isGameWon && moves >= 20 && <p className="text-xl font-bold text-red-500 mt-2">Mmm... O no tenés mucha memoria o no recorriste todo el portfolio aún 🥸</p>}
       {(isGameWon || moves > 0) && (
          <Button onClick={initializeGame} variant="outline" className="mt-6 bg-card/80 hover:bg-card text-white hover:text-foreground">
             {isGameWon ? 'Jugar de Nuevo' : 'Reiniciar Juego'}

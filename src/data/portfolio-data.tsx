@@ -11,7 +11,7 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Briefcase, MessageSquare, TrendingUp, Brain, Zap, Lightbulb, Award, Code as CodeIcon, MapPin, Sparkles, UserCircle, Target as TargetIcon } from 'lucide-react';
+import { Briefcase, MessageSquare, TrendingUp, Brain, Zap, Lightbulb, Award, Code as CodeIcon, MapPin, Sparkles, UserCircle, Target as TargetIcon, LetterText, Frame } from 'lucide-react';
 import Timeline from '@/components/ui/timeline';
 import ProjectSlider from '@/components/project/ProjectSlider';
 import ContactForm from '@/components/contact/ContactForm';
@@ -88,12 +88,12 @@ const experienceItems = [
 
 // New data for MemoTestGame
 export const memoTestGameData = [
-  { q: "Edad", a: "25", qIcon: UserCircle, aIcon: Award },
-  { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: Sparkles },
-  { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: TargetIcon },
-  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Briefcase }, // Use Briefcase instead of BriefcaseIcon
-  { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Lightbulb },
-  { q: "Framework más usado", a: "Vue.js", qIcon: Brain, aIcon: VuejsIcon },
+  { q: "Edad", a: "25", qIcon: UserCircle, aIcon: UserCircle },
+  { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: MapPin },
+  { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: CodeIcon },
+  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Brain }, // Use Briefcase instead of BriefcaseIcon
+  { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Zap },
+  { q: "Framework más usado", a: "Vue.js", qIcon: Frame, aIcon: VuejsIcon },
 ];
 
 export const homePageSectionsData: HomePageSection[] = [
@@ -115,7 +115,7 @@ export const homePageSectionsData: HomePageSection[] = [
       </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://images.unsplash.com/photo-1592636120953-3d2b28ebfd69?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    backgroundImageUrl: 'https://lh3.googleusercontent.com/pw/AP1GczNnzDMHV0fX-5kOspAxIj78zNwM8FLvIsRWTVuPWN79fVzgHo8pz5AtB_m-Lw0y0kK17b3HV3OKa67r1FUEQ_SOqsZkBjvKUybLlxGoEAIphkogu_TsFful7F44UD3z8GualxgtPGoWzvn9wK_2NusXhI9sW72aH7IOUjtROJ2FrEAwKV14J3yUA_1EYtEuoJ9RQ9zxf7cUnbvDbcNeiL7sCgKUIrUpiQ9di6rXcfySHupzdUVxiDp4Byp-G50_h3X3aLfSFmGrkqqkHgeJbl0LvbxHDTOQQbgvcT8UQXlPhmedZmboYw5pvXSgbpf3Rltos76T8NF8s5752oYz8ijvvDWK-sVmMjObl2o72GOjT5nM7Cb6NREMTJziFS527lMVdUs13OfklZH_aFDhiyaZRikSa7eoeM4nQPzfY5c_8E0UFtDT7f1cOmArqAO0QtcKEvuM8Em2ISg0drMBZOo51qqXNitiy2mVSo-6dsedmKsgC1BIcsU7768CJbBwVNtTvBGzB4Wrb1qvih2NMawekg5CsD9-RQNsknC2cjGUIfQwfDFAGeCfa9iGn0OXJQln3QZgnX-XTbmOM6f-Mhf5fvqhP9eRb5kyLAbEHGdZQKZMgh7QEnRa-TJ6JwiPqL8uxH-runm4x6Vs7kPlGAO-jGv6FsmBE1hvW_Lvg-TjO7Ooisn_oivlKCgxLs2gPX4xWOjA5Bn50gpdLSSwaAUIA9ElWBfF6fnuA-xRYrlpKsOxThPqgl8NOQderdyKgIO2jtwDFvD4XnBTYMdu1DBJwlMIZLHFgknBW9ryL2bvHmKPqOVoco-vEzK9aD2Kd-Hpl2W46DO0jW53HHjaUx6MbhWYLrL6vi67jQs1hFxLSD1jma9q_pHDoly-2og2_wlKfKve2PfkLRDOLnY3y96XuA1J2N148KdS9FnPmu_OEJggsef8LK5m6JHzZj6uL17j439UkE00KVHbOjlUB-ppWm6_Dbl6R7GzjN5-LVuDYYCKUWnnb5ZXC0jnitxpYiSGevVlIBIwEN6zUJrGkWFVM6NfAyPtq-DyqHmC6MUlOO_pQKGyH8ImmfCJ2xheSY-G1eRogFhzT9Pg1op4kTlUWKIUzqmXDH1YE64Iqi0sxD2qlCKrN74yvgPG_mlWMQBtChLL3A=w1440-h960-no?authuser=0',
   },
   {
     id: 'about-me',
@@ -141,7 +141,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://images.unsplash.com/photo-1598162480222-b2c3d92548d5?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    backgroundImageUrl: 'https://lh3.googleusercontent.com/pw/AP1GczOCg004CKZQhLfZ_xapjSABEKg10YErvJTWWvUOx3TXk5W8b3Cd6RKVndTvdbHwQ8nzCEtU7McpOwir-1ydr46IMBCDVAn51mrmg0YFaKf2WeQh1IVRH8M5CY5_JtCFC3YHbu6Mh267dhNdwn1BcpIXaYxV7iEOawfjCLx3kG5J--w_qIdiyZzIoDHCtAzrpC5SSYbU_S6Xtq_e7tsotKGH5JS7bLPXsiJ9YK7DGSCxJxMNwlVBLZTOOLzkTz2kYU-8LLrdAZZMHroqdvk-wcCNXnRueU0EuODMJz6MClgaLcjWAD7qYkvGeIl_yUSx_Ke7XN8xihKWdHCTHSRbhCjrlwTGKE0hlXqA17z4gdTVOERzCKfiePAHUm5otE5iWzCxcleuCr_vV0177CoKfOZHJfxq-nShBlSxwlkpeYQXeDoW-bywXad-DSbHzmBiMQ3bq_41MA7QQosNVZwaQgY1N5G9EcOyts6Tz7B1t_bTm2pAF2J1lpMXi6ymXZkROt0M5oFosYEdTXCKJpuvoizwxwU9SNFGGsEEabyF9yd34aw-rLAKamixk5ybXxujJWvuLaesmgsj86EaSwTHxbhnRI_-nwGiL6tE5PAQC7iQKMNP_U0nr7ZVGD64F2tQQTYeVi0s62N0iuEGwZwN0E0i9-b0gzhl4ze9Ya05T8Kkw7LBhs2YXYNpkfwItn4-3smQLQxAakyi6eWPPpbMtBM2ze_Er9atMhS4tVTVz89FDpC83FuDj-7_s6az2KaQsPIWZEvz5lQf06-Y8fGz09ZHN4VLlIBoK_t-Sl4I4Yj2i6psAQfjfnKMnwcm1pi5-ikaiB3avCsksJJXSeplzMTzA67eDawPJjrVnOueAKB376yA-pbOcvZPEgwXlku3ikIv-PyTldCdqGO_ASslcb82SVeFjl2oSR6I9z7xlUBnk9xVsrICzyyVHJfc-CzGb8ncqMznpraL-xGY4B-fYrySRywV2PBQo_Vv8G-TGpRxM0xL6jBwDzFgU-ZsDEFgjz-wR0pD5LLfcL6PXocwFkLZB2VhzD_1Dm8NZPFFzleoVjNj9_m_3-a7HIt7PfhAmR75_S03d3hCok1CPrtvNEHBU7HXfmuFw2bv1NVVVUcnbb3cdVOrHKFUED4lWK2jj2jk9HLTvA=w1440-h960-no?authuser=0',
   },
   {
     id: 'experience',
@@ -160,7 +160,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    backgroundImageUrl: 'https://lh3.googleusercontent.com/pw/AP1GczNsJg7kZVrRLqSuxSzvrO-eBT_ufrmLiKTNFauTtZFUZhLyirzebWfx5V2pDaNOnx9kDjppSHW8GnUEimFfmd9FGZyohzQXH0yZWmi5vhfVJDZUEUAke666o_DY2rwyULFcVQc338xMc6dQ-gkgjf8Yca9yI4UUA7xuUP0IgHbql0kgz3N7Ln-t9c9gIEIws4ZsXlzL3fNxjmAs2FaWKHNQ64xPciJSAr9mAsoyDUtX44jfdG-uO_EHtSls68US0_Zd1LqDtfVQW6F8nfyTIavGFE26anzUEBDkQiBCYSgCwV70FqQWxP4NrdUXyu2WJ2ywwD_Jy8sgGn307kYtuKA0flJ7J69O1edle3m-NAYcoL3OTcxxUU0EVfXsihGVLjr0JIMmXxPn3c0dBqQCxUnzD3x-m53XzaB6FHRmsaSs4gYUzu0zpBEJi9J2FRzjcds8wMCEmLP5A8nJ8CXZzZ37XF71m5JP9pTH6BoGe4blfTlQDLqtvephGDjaSHg9vECiYLUwaNnSWYdcYx81OlPaZxmOCnNq0FqU1iGt3IZUQvx9GJbRJvktMSYUkLUtX3VM6_lDAOeCF6dBsirc4DYhN-XFs6kZDCp5QYSnaF_2Ld3wumEz-D63YedlW81d_jXP5bAeRxKM268puzOEKJ5AOMuuw56DvORzFq5tQBoyASm7ys7NjzTNVs0Xq8c51H73iKkJw7yUbkZKPz5NqKZHGjvxJLcADsRVievc_Jw8PZqBT2GJmRECoRDIYHla81eKOBMJRLpb1_5cUvDzqB796fO4_V8Th-PoVybXGUzr4jtHp7ErLnj6No0s06n4xfNlVlQJK6MD3vS7PNbfVmYAqaxnUEHB1vpN3bY9-LZ1QL6IA7nYKdVS9EjEI3GGvrFdrc_fZoLqP_jRkqmNPq6TY0n3NABQA_YhPeW5OAZaeBDrEoHekt5inI-9q7IK9_gaU0gN7KYzO12TxAwkv85UHIVjthVK7sKv9cDUsKKX62HXheq3I-r9JjhTVPu0yk0A4K_9Sw_b5OI8q18X8dquSwbaiBpvZuUuZv6JbhL_mig_0QIq7capGGt39jNJ-AJGigu9cvoGuLmxEvgg2iPQxRadc9g-0m4H_pFT1Mu_lHBr_kFHwLn4kzbIgQkVNbJn8QyMlA=w1440-h960-no?authuser=0',
   },
   {
     id: 'memo-test-game',
@@ -178,7 +178,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://images.unsplash.com/photo-1642278460334-a65640d55509?q=80&w=2712&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    backgroundImageUrl: 'https://lh3.googleusercontent.com/pw/AP1GczNQqiAtDZGwp0YZqpqaQDXsAD0s80am-p11gFflTATf3WKt-dRZJRDj762fJb5vdf_Yu761feK2SUIoQ58zQ1qMMvUytyV-Mnq14saeW18SpqHtYETjXPvU8jtWoQKShZ5rECDzmnH19_iJajrrbiRX4q8Yq3GK9uHE6tr8APrjKovIjbNFBMRTn4V9FgzDRWInDIN2AHOVucTVvaNIgFda-WgGJ4pp0nkHYIYiIAOXQ0trI4LHLYCYLwv3Dc24Ij6Pd5UeP1y1NpaEq6xSKhmRnjTNoEsfkG0gUsyUVzm7DD8TjGRBqcEPCMWosPOkpbX7jnBhxpQEIC9EUPInv15kNfUUv9YIGm8C8D0yK0EuFwcqxSh2aUTIWRc0aeOtonuP32Pov2SRJWqRjEfLpJ-9l42cRehMaC27FN_S3a3NYqXcXPw-72vaEfTjhXjj7acwzQpcMYYnjabvCkdLK9jkzI3recZylLVcfzCwXCXUTr0eZgkoAx8otkvvQ9jp35VaxXUV6vSh4g47sLq8NMnEogUXQs0kQSzLWZKw-wKHZCfYn2RW0IruBWrFjJDHNX9IpeQ84DEIQ6YV2lnspumbzW3sYZZ6WnlJdbuj6hwO7kwwUng_vfwytsM2_KV5y6RADyMyVAQJkFikBrIBEsghAxqDm3U8RAvIeLvXZzsqLp7BDiBIy-pfkdnH5NwGC_to-XWx6JNFT3j6cJu5ku-ZwAPndwA7euahhpgXmS3z-7GeBphr3ULi5vqH-ZKrtw1HwfD9wefphDqpqbsmZq8tLSyw_7-KSg7nj1AFqQKPgFWyW9TVniEQ0JmwGsT-qPI1NY6SRDTvXx0taRI52jKKpUhU9pY_gxAqcCFHlK1X1MDxpuRmEMKhg4mNiDVAhCfb9uGXu71mnzYrkciqmXAqHGuTJgLMiEGXpZNBHxZ1ER4mCdXbwlWCddRnz4D1trZqIKP8PUSqX1STz7eXNxa8Sw6Oo4GNdN1h2u_4hWgGDV2f3BkkuYmpmj-pD4xYkREGV33iLm-lgTrMiM4eEaw20mKSbDAMTVOLLUcS29RlNUPG2N38xKTZptlfQfD3CnUXMwsn299oDIT-TXLNhQIUcPyK6wQIueWZ5JrG86--1aD4EmIAq6bCw5BMvaH9J2uSRLVOjA=w1359-h1041-no?authuser=0',
     },
    {
     id: 'contact-me-section',
@@ -196,7 +196,7 @@ export const homePageSectionsData: HomePageSection[] = [
         </div>
       </React.Fragment>
     ),
-    backgroundImageUrl: 'https://images.unsplash.com/photo-1563906267088-b029e7101114?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    backgroundImageUrl: 'https://lh3.googleusercontent.com/pw/AP1GczMewpyBRMYo_0enMAXk7rLsipSFw-RUPvwi4KcfijVfzGoQqeQDQ3V4KNjKycCMkInce9m_YtbAFCfAk6drPa4zeebzEZWu13jVEzrT3rlAu84k_N3zDNjRVE4FFzORG3Xwpy45AMxXF-qFKczd2NmIFA=w1619-h1080-s-no-gm?authuser=0',
   },
 ];
 
