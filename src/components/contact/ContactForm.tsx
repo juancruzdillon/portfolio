@@ -50,8 +50,8 @@ const ContactForm: React.FC = () => {
   const onSubmit = async (data: ContactFormValues) => {
     try {
       await sendEmail({
-        subject: `Nuevo Contacto desde PortfoliTok: ${data.name}`,
-        body: `Nombre: ${data.name}\nEmail: ${data.email}\nMensaje:\n${data.message}`,
+        subject: `${data.name} se quiere comunicar con vos, te escribió desde el portfolio sección contacto`,
+        body: `<p>Nombre: ${data.name}<br/>Email: ${data.email}<br/>Mensaje:<br/>${data.message}</p>`,
       });
       toast({
         title: "¡Mensaje Enviado!",

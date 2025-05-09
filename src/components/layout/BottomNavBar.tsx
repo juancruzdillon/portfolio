@@ -99,6 +99,15 @@ export function BottomNavBar() {
     console.log("Comment submitted:", comment);
     // Here you would typically send the comment to a backend service
     // For now, we'll just show a success toast
+    try {
+      await sendEmail({
+          subject: `Te escribieron un comentario desde el portfolio`,
+          body: `<p>${comment}</p>`
+      });
+    } catch(error) {
+      console.error('error procesando comentario');
+      toast({ title: "¡Ups!", description: "Ocurrió un error al enviar tu comentario. Intenta más tarde.", variant: "destructive" }); 
+    }
     toast({ title: "¡Éxito!", description: "¡Gracias por tu comentario!" });
     setComment('');
     setIsCommentDialogOpen(false);
@@ -149,8 +158,8 @@ export function BottomNavBar() {
             }
             try {
                 await sendEmail({
-                    subject: `Nuevo Mensaje de ${userName} desde PortfoliTok`,
-                    body: `Nombre: ${userName}\nEmail: ${userEmail}\nMensaje: ${submittedText}`,
+                    subject: `${userName} se quiere comunicar con vos, te escribió desde el portfolio sección inbox`,
+                    body: `<p>Nombre: ${userName}<br/>Email: ${userEmail}<br/>Mensaje:<br/>${submittedText}</p>`
                 });
                 setChatMessages(prev => [...prev, { sender: 'bot', text: '¡Mensaje Enviado! Gracias por escribirme, pronto te voy a contactar.' }]);
                 setChatStage('messageSent');
