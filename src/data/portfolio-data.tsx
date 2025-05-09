@@ -166,14 +166,14 @@ export const homePageSectionsData: HomePageSection[] = [
   {
     id: 'memo-test-game',
     type: 'game',
-    title: 'Ahora ¿cuánto sabes de mí?',
+    title: 'Ahora vamos a ver, ¿cuánto sabes de mí?',
     content: (
       <React.Fragment>
         <div className="p-4 text-center w-full max-w-2xl mx-auto flex flex-col items-center justify-center h-full">
             <Brain className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
-            <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Pon a prueba tu memoria</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Poné a prueba tu memoria</h3>
             <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md">
-                Encuentra los pares correctos y descubre algunos datos sobre mí. ¡Buena suerte!
+                Encontrá los pares correctos y descubrí algunos datos sobre mí. Buena suerte!
             </p>
             <MemoTestGame pairs={memoTestGameData} />
         </div>
