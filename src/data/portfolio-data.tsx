@@ -20,6 +20,7 @@ import MemoTestGame from '@/components/game/MemoTestGame';
 
 const technologies: Record<string, Technology> = {
   react: { name: 'React', icon: ReactIcon },
+  vue: { name: 'Vue.js', icon: VuejsIcon },
   nextjs: { name: 'Next.js', icon: NextjsIcon },
   tailwind: { name: 'Tailwind CSS', icon: TailwindIcon },
   nodejs: { name: 'Node.js', icon: NodejsIcon },
@@ -31,84 +32,20 @@ const technologies: Record<string, Technology> = {
 
 export const projectsData: Project[] = [
   {
-    id: 'project-1',
-    title: 'Plataforma E-commerce',
-    shortDescription: 'Una solución de e-commerce full-stack con características modernas.',
-    longDescription: 'Desarrollé una plataforma de e-commerce integral que permite a los usuarios explorar productos, agregarlos al carrito y completar compras. Incluye autenticación de usuarios, gestión de productos, procesamiento de pedidos y un diseño responsivo para una visualización óptima en todos los dispositivos. Integrado con Stripe para pagos.',
-    imageUrl: 'https://picsum.photos/seed/project1/600/900', // Adjusted for portrait
-    technologies: [technologies.react, technologies.nextjs, technologies.tailwind, technologies.nodejs, technologies.typescript],
-    duration: '3 Meses',
-    collaborators: ['Jane Doe (Diseñadora)', 'Mike Ross (Desarrollador Backend)'],
-    liveLink: '#',
-    repoLink: '#',
-    isPinned: true, // First project is pinned
-    views: "680.2K"
-  },
-  {
-    id: 'project-2',
-    title: 'Aplicación de Redes Sociales',
-    shortDescription: 'Una aplicación de redes sociales centrada en compartir fotos.',
-    longDescription: 'Construí una aplicación de redes sociales que permite a los usuarios crear perfiles, subir fotos, seguir a otros usuarios e interactuar con publicaciones mediante "me gusta" y comentarios. Implementé notificaciones en tiempo real y un algoritmo para el feed. Me enfoqué en una UI/UX limpia y en el rendimiento.',
-    imageUrl: 'https://picsum.photos/seed/project2/600/900', // Adjusted for portrait
-    technologies: [technologies.react, technologies.nodejs, technologies.javascript],
-    duration: '4 Meses',
-    liveLink: '#',
-    views: "23.5K"
-  },
-  {
-    id: 'project-3',
-    title: 'Sitio Web Portfolio',
-    shortDescription: 'Este mismo sitio web de portfolio, construido con Next.js y Tailwind CSS.',
-    longDescription: 'Diseñé y desarrollé este sitio web de portfolio para mostrar mis habilidades y proyectos. Presenta una UI inspirada en TikTok, diseño responsivo y elementos interactivos. El objetivo fue crear una forma única y atractiva de presentar mi trabajo.',
-    imageUrl: 'https://picsum.photos/seed/project3/600/900', // Adjusted for portrait
-    technologies: [technologies.nextjs, technologies.react, technologies.tailwind, technologies.typescript],
-    duration: '1 Mes',
-    collaborators: ['Autodirigido'],
-    repoLink: '#',
-    views: "21.8K"
-  },
-   {
-    id: 'project-4',
-    title: 'Aplicación de Gestión de Tareas',
-    shortDescription: 'Un gestor de tareas estilo Kanban para individuos y equipos.',
-    longDescription: 'Creé una aplicación de gestión de tareas con funcionalidades como tableros de arrastrar y soltar, asignación de tareas, fechas de entrega y seguimiento del progreso. Me enfoqué en una experiencia de usuario colaborativa e intuitiva.',
-    imageUrl: 'https://picsum.photos/seed/project4/600/900', // Adjusted for portrait
-    technologies: [technologies.react, technologies.typescript, technologies.tailwind],
-    duration: '2 Meses',
-    repoLink: '#',
-    views: "9365"
-  },
-  {
-    id: 'project-5',
-    title: 'API Buscador de Recetas',
-    shortDescription: 'Una API RESTful para buscar y recuperar recetas.',
-    longDescription: 'Desarrollé un servicio API de backend que permite a los usuarios buscar recetas basadas en ingredientes, tipo de cocina o restricciones dietéticas. Implementado con Node.js y Express, utilizando una base de datos de recetas de terceros.',
-    imageUrl: 'https://picsum.photos/seed/project5/600/900', // Adjusted for portrait
-    technologies: [technologies.nodejs, technologies.javascript],
-    duration: '1.5 Meses',
-    liveLink: '#',
-    views: "9996"
-  },
-  {
-    id: 'project-6',
-    title: 'Panel del Clima',
-    shortDescription: 'Un panel simple para mostrar el clima actual y los pronósticos.',
-    longDescription: 'Construí un panel del clima que obtiene y muestra información meteorológica de una API externa. Los usuarios pueden buscar ubicaciones y ver las condiciones actuales, así como pronósticos por hora y diarios.',
-    imageUrl: 'https://picsum.photos/seed/project6/600/900', // Adjusted for portrait
-    technologies: [technologies.html, technologies.css, technologies.javascript],
-    duration: '3 Semanas',
-    views: "5388"
-  },
-  {
-    id: 'project-7',
-    title: 'Plataforma de Blog Personal',
-    shortDescription: 'Una plataforma de blogs minimalista con soporte para Markdown.',
-    longDescription: 'Diseñé y desarrollé una plataforma de blogs limpia y centrada en el contenido. Admite la redacción de publicaciones en Markdown, la categorización de artículos y una experiencia de lectura simple y responsiva.',
-    imageUrl: 'https://picsum.photos/seed/project7/600/900', // Adjusted for portrait
-    technologies: [technologies.nextjs, technologies.react, technologies.tailwind],
-    duration: '2 Meses',
-    repoLink: '#',
-    views: "28.7K"
+    id: 'tplay-web',
+    title: 'Telecentro Web',
+    shortDescription: 'Participé en el desarrollo e inovación de la plataforma tplay web',
+    longDescription: 'Tplay web es una plataforma de contenido VOD y canales LIVE al estilo netflix, permitiendo ver contenido en vivo, pelis, series, contenido grabado y mucho más!\n Participe en el desarrollo activamente más que nada en el front resolviendo issues de la UI y mejoras que iban surgiendo.',
+    imageUrl: 'https://i.ibb.co/KjYPDCZ6/tplay-web.webp', // Adjusted for portrait
+    // imageUrlPortrait: 'https://i.ibb.co/MDh3B8HK/default.webp', // default
+    imageUrlPortrait: 'https://i.ibb.co/HfYDqjQG/tplay-web-portrait.webp',
+    technologies: [technologies.vue, technologies.css, technologies.nodejs, technologies.javascript, technologies.html],
+    duration: 'Actual',
+    collaborators: ['Equipo ingeniería y desarrollo'],
+    liveLink: '',
+    repoLink: '',
+    isPinned: true,
+    views: "0"
   },
 ];
 

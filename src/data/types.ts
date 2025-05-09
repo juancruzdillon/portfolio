@@ -12,6 +12,7 @@ export interface Project {
   shortDescription: string;
   longDescription: string;
   imageUrl: string;
+  imageUrlPortrait: string,
   technologies: Technology[];
   duration: string;
   collaborators?: string[];

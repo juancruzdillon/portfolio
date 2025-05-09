@@ -42,7 +42,7 @@ const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ projec
 
       {/* Imagen real */}
       <Image
-        src={project.imageUrl}
+        src={project.imageUrlPortrait}
         alt={project.title}
         fill
         style={{ objectFit: 'cover' }}
@@ -62,8 +62,9 @@ const ProjectGridItem: React.FC<{ project: Project; index: number }> = ({ projec
         </div>
       )}
 
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
         <Play className="w-12 h-12 text-white/90 fill-white/30" />
+        <p className="text-white text-sm mt-2">{project.title}</p>
       </div>
 
       <div className="absolute bottom-2 left-2 text-white text-xs font-semibold flex items-center bg-black/50 px-1.5 py-0.5 rounded z-10">
