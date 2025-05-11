@@ -8,7 +8,7 @@ import NextImage from 'next/image';
 const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
   return (
     <div 
-      className="min-h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 p-4"
+      className="min-h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 p-4 pb-20 md:pb-4"
       style={{
         scrollSnapAlign: 'start',
       }}
@@ -41,9 +41,10 @@ export default function HomePage() {
   return (
     <>
       <div
-        className="homepage-sections-container flex-grow overflow-y-auto w-full group"
+        className="homepage-sections-container flex-grow overflow-y-auto w-full group overscroll-y-contain"
         style={{
           scrollSnapType: 'y mandatory',
+          scrollSnapStop: 'always'
         }}
       >
         {homePageSectionsData.map((section) => (

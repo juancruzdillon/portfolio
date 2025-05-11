@@ -166,14 +166,14 @@ export const homePageSectionsData: HomePageSection[] = [
   {
     id: 'memo-test-game',
     type: 'game',
-    title: 'Ahora vamos a ver, ¿cuánto sabes de mí?',
+    title: 'Ahora ¿cuánto sabes de mí?',
     content: (
       <React.Fragment>
         <div className="p-4 text-center w-full max-w-2xl mx-auto flex flex-col items-center justify-center h-full">
             <Brain className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
-            <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Poné a prueba tu memoria</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Pon a prueba tu memoria</h3>
             <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md">
-                Encontrá los pares correctos y descubrí algunos datos sobre mí. Buena suerte!
+                Encuentra los pares correctos y descubre algunos datos sobre mí. ¡Buena suerte!
             </p>
             <MemoTestGame pairs={memoTestGameData} />
         </div>
@@ -184,15 +184,12 @@ export const homePageSectionsData: HomePageSection[] = [
    {
     id: 'contact-me-section',
     type: 'contact',
-    title: 'Contáctame',
+    title: '',
     content: (
       <React.Fragment>
         <div className="flex flex flex-col h-75 text-center w-full max-w-md mx-auto">
           <MessageSquare className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
           <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Ponete en Contacto</h3>
-          <p className="text-base sm:text-lg text-white/90 mb-6">
-          Si querés contactarme llená este formulario y pronto me voy a comunicar con vos 😀
-          </p>
           <ContactForm />
         </div>
       </React.Fragment>
