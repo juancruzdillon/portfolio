@@ -19,6 +19,8 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { sendEmail } from "@/services/email";
 import { Send } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { useRef } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -37,6 +39,7 @@ const formSchema = z.object({
 type ContactFormValues = z.infer<typeof formSchema>;
 
 const ContactForm: React.FC = () => {
+  const recaptcha = useRef<ReCAPTCHA | null>(null);
   const { toast } = useToast();
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
@@ -49,6 +52,37 @@ const ContactForm: React.FC = () => {
 
   const onSubmit = async (data: ContactFormValues) => {
     try {
+      const captchaValue = recaptcha?.current?.getValue();
+      if (!captchaValue) {
+        toast({ title: "¡Ups!", description: "Para continuar debes resolver primero el captcha.", variant: "destructive" });
+        return;
+      } else {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND}/api/verify`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ captchaValue }),
+          }
+        );
+        if (!response.ok) {
+          toast({
+            title: "¡Ups!",
+            description: "Hubo un error de red al verificar el captcha.",
+            variant: "destructive",
+          });
+          return;
+        }
+        const data = await response.json();
+        if (!data.success) {
+          toast({
+            title: "¡Ups!",
+            description: "El captcha no es válido, intentá de nuevo.",
+            variant: "destructive",
+          });
+          return;
+        }
+      }
       await sendEmail({
         subject: `${data.name} se quiere comunicar con vos, te escribió desde el portfolio sección contacto`,
         body: `<p>Nombre: ${data.name}<br/>Email: ${data.email}<br/>Mensaje:<br/>${data.message}</p>`,
@@ -58,6 +92,7 @@ const ContactForm: React.FC = () => {
         description: "Gracias por contactarme. Te responderé pronto.",
       });
       form.reset();
+      recaptcha.current?.reset();
     } catch (error) {
       console.error("Failed to send message:", error);
       toast({
@@ -123,6 +158,7 @@ const ContactForm: React.FC = () => {
             </FormItem>
           )}
         />
+        <ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} />
         <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" disabled={form.formState.isSubmitting}>
           <Send className="mr-2 h-4 w-4" />
           {form.formState.isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}

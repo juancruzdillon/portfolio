@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { sendEmail } from '@/services/email';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 interface NavItemProps {
   href?: string;
@@ -57,6 +58,8 @@ type ChatMessage = {
 };
 
 export function BottomNavBar() {
+  const recaptcha = useRef<ReCAPTCHA | null>(null);
+
   const pathname = usePathname();
   const { toast } = useToast();
   const [comment, setComment] = React.useState('');
@@ -96,21 +99,52 @@ export function BottomNavBar() {
       toast({ title: "¡Ups!", description: "El comentario no puede estar vacío.", variant: "destructive" });
       return;
     }
-    console.log("Comment submitted:", comment);
     // Here you would typically send the comment to a backend service
     // For now, we'll just show a success toast
     try {
+      const captchaValue = recaptcha?.current?.getValue();
+      if (!captchaValue) {
+        toast({ title: "¡Ups!", description: "Para continuar debes resolver primero el captcha.", variant: "destructive" });
+        return;
+      } else {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND}/api/verify`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ captchaValue }),
+          }
+        );
+        if (!response.ok) {
+          toast({
+            title: "¡Ups!",
+            description: "Hubo un error de red al verificar el captcha.",
+            variant: "destructive",
+          });
+          return;
+        }
+        const data = await response.json();
+        if (!data.success) {
+          toast({
+            title: "¡Ups!",
+            description: "El captcha no es válido, intentá de nuevo.",
+            variant: "destructive",
+          });
+          return;
+        }
+      }
       await sendEmail({
           subject: `Te escribieron un comentario desde el portfolio`,
           body: `<p>${comment}</p>`
       });
+      toast({ title: "¡Éxito!", description: "¡Gracias por tu comentario!" });
     } catch(error) {
       console.error('error procesando comentario');
       toast({ title: "¡Ups!", description: "Ocurrió un error al enviar tu comentario. Intenta más tarde.", variant: "destructive" }); 
     }
-    toast({ title: "¡Éxito!", description: "¡Gracias por tu comentario!" });
     setComment('');
     setIsCommentDialogOpen(false);
+    recaptcha.current?.reset();
   };
 
   const handleChatSubmit = async (e?: React.FormEvent) => {
@@ -157,6 +191,37 @@ export function BottomNavBar() {
                 return;
             }
             try {
+                const captchaValue = recaptcha?.current?.getValue();
+                if (!captchaValue) {
+                  toast({ title: "¡Ups!", description: "Para continuar primero debes resolver el captcha.", variant: "destructive" });
+                  return;
+                } else {
+                  const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_BACKEND}/api/verify`,
+                    {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ captchaValue }),
+                    }
+                  );
+                  if (!response.ok) {
+                    toast({
+                      title: "¡Ups!",
+                      description: "Hubo un error de red al verificar el captcha.",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
+                  const data = await response.json();
+                  if (!data.success) {
+                    toast({
+                      title: "¡Ups!",
+                      description: "El captcha no es válido, intentá de nuevo.",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
+                }
                 await sendEmail({
                     subject: `${userName} se quiere comunicar con vos, te escribió desde el portfolio sección inbox`,
                     body: `<p>Nombre: ${userName}<br/>Email: ${userEmail}<br/>Mensaje:<br/>${submittedText}</p>`
@@ -164,11 +229,12 @@ export function BottomNavBar() {
                 setChatMessages(prev => [...prev, { sender: 'bot', text: '¡Mensaje Enviado! Gracias por escribirme, pronto te voy a contactar.' }]);
                 setChatStage('messageSent');
                 toast({ title: "¡Mensaje Enviado!", description: "Gracias por contactarme." });
-            } catch (error) {
+              } catch (error) {
                 console.error("Failed to send message:", error);
                 setChatMessages(prev => [...prev, { sender: 'bot', text: 'No se pudo enviar el mensaje. Por favor, inténtalo de nuevo más tarde.' }]);
                 toast({ title: "Error", description: "No se pudo enviar el mensaje.", variant: "destructive" });
-            }
+              }
+            recaptcha.current?.reset();
             break;
     }
   };
@@ -234,6 +300,7 @@ export function BottomNavBar() {
             />
             <p className="text-xs text-muted-foreground">Presiona Ctrl + Enter para enviar el comentario.</p>
           </div>
+          <ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} />
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => setIsCommentDialogOpen(false)}>Cancelar</Button>
             <Button type="submit" onClick={handleCommentSubmit}>Enviar Comentario</Button>
@@ -315,6 +382,7 @@ export function BottomNavBar() {
                 <p className="text-xs text-muted-foreground">Presiona Ctrl + Enter para enviar.</p>
               </>
             )}
+            <ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITE_KEY || ""} />
             <DialogFooter className="pt-2 sm:justify-between"> {/* Adjusted pt for spacing */}
                 <Button type="button" variant="outline" onClick={() => setIsInboxDialogOpen(false)}>
                     {chatStage === 'messageSent' ? 'Cerrar' : 'Cancelar'}
