@@ -8,7 +8,7 @@ import NextImage from 'next/image';
 const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
   return (
     <div 
-      className="min-h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 p-4 md:pb-4"
+      className="min-h-full w-full relative flex flex-col items-center text-white snap-start shrink-0"
       style={{
         scrollSnapAlign: 'start',
       }}
@@ -25,7 +25,7 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
           priority={section.id === homePageSectionsData[0].id} 
         />
       )}
-      <div className="relative z-10 p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg shadow-xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-center w-full flex flex-col">
+      <div className="mt-[5vh] md:mt-[25vh] relative z-10 p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg shadow-xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-center w-full flex flex-col">
         {section.type !== 'projects' && (
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">{section.title}</h2>
         )}
@@ -41,7 +41,7 @@ export default function HomePage() {
   return (
     <>
       <div
-        className="homepage-sections-container flex-grow overflow-y-auto w-full group overscroll-y-contain"
+        className="homepage-sections-container flex-grow overflow-y-scroll snap-y snap-mandatory w-full group overscroll-y-contain"
         style={{
           scrollSnapType: 'y mandatory',
           scrollSnapStop: 'always'
