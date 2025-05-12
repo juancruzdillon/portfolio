@@ -1,6 +1,6 @@
 "use client";
 import type React from 'react';
-import { BottomNavBar } from '@/components/layout/BottomNavBar';
+// import { BottomNavBar } from '@/components/layout/BottomNavBar'; // Removed import
 import { homePageSectionsData } from '@/data/portfolio-data';
 import type { HomePageSection } from '@/data/types';
 import NextImage from 'next/image';
@@ -51,7 +51,7 @@ export default function HomePage() {
           <SectionCard key={section.id} section={section} />
         ))}
       </div>
-      <BottomNavBar />
+      {/* <BottomNavBar /> */} {/* Removed BottomNavBar instance */}
     </>
   );
 }
