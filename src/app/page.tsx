@@ -8,7 +8,7 @@ import NextImage from 'next/image';
 const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
   return (
     <div 
-      className="min-h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 p-4 pb-20 md:pb-4"
+      className="min-h-full w-full relative flex flex-col items-center justify-center text-white snap-start shrink-0 p-4 md:pb-4"
       style={{
         scrollSnapAlign: 'start',
       }}
