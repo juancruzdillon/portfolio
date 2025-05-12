@@ -25,7 +25,7 @@ const SectionCard: React.FC<{ section: HomePageSection }> = ({ section }) => {
           priority={section.id === homePageSectionsData[0].id} 
         />
       )}
-      <div className="mt-[5vh] md:mt-[25vh] relative z-10 p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg shadow-xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-center w-full flex flex-col">
+      <div className="mt-[1vh] md:mt-[25vh] relative z-10 p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg shadow-xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-center w-full flex flex-col">
         {section.type !== 'projects' && (
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">{section.title}</h2>
         )}
