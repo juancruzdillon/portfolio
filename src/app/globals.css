@@ -111,6 +111,36 @@
 
 }
 
+:root {
+  --muted: #E5E7EB;
+  --primary: #008080;
+  --accent: #20B2AA;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--muted);
+}
+
 @keyframes shimmer {
   100% { transform: translateX(100%); }
 }

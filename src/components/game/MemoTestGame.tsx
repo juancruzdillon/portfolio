@@ -151,8 +151,7 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ desktopPairs, mobilePairs }
       )}
       <div className="mb-4 text-center">
         <p className="text-lg text-white/90">Movimientos: {moves}</p>
-        {isGameWon && moves <= 20 && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste!</p>}
-        {isGameWon && moves > 20 && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste! Pero costo ja...</p>}
+        {isGameWon && <p className="text-xl font-bold text-primary mt-2">¡Felicidades, ganaste!</p>}
       </div>
       <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-5 max-w-md mx-auto">
         {cards.map((card, index) => (
