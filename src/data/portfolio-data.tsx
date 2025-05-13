@@ -11,7 +11,7 @@ import JavaScriptIcon from '@/icons/JavaScriptIcon';
 import TypeScriptIcon from '@/icons/TypeScriptIcon';
 import HtmlIcon from '@/icons/HtmlIcon';
 import CssIcon from '@/icons/CssIcon';
-import { Briefcase, MessageSquare, TrendingUp, Brain, Zap, Lightbulb, Award, Code as CodeIcon, MapPin, Sparkles, UserCircle, Target as TargetIcon, LetterText, Frame } from 'lucide-react';
+import { Briefcase, MessageSquare, TrendingUp, Brain, Zap, Lightbulb, Award, Code as CodeIcon, MapPin, Sparkles, UserCircle, Frame, BookOpen } from 'lucide-react';
 import Timeline from '@/components/ui/timeline';
 import ProjectSlider from '@/components/project/ProjectSlider';
 import ContactForm from '@/components/contact/ContactForm';
@@ -89,13 +89,22 @@ const experienceItems = [
 ];
 
 // New data for MemoTestGame
-export const memoTestGameData = [
+export const memoTestGameDataDesktop = [
   { q: "Edad", a: "25", qIcon: UserCircle, aIcon: UserCircle },
   { q: "Nacionalidad", a: "Argentina", qIcon: MapPin, aIcon: MapPin },
   { q: "Especialidad", a: "Front End", qIcon: CodeIcon, aIcon: CodeIcon },
-  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Brain }, // Use Briefcase instead of BriefcaseIcon
+  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Brain },
   { q: "Pasión", a: "Programar", qIcon: Zap, aIcon: Zap },
-  { q: "Framework más usado", a: "Vue.js", qIcon: Frame, aIcon: VuejsIcon },
+  { q: "Trabajo con", a: "Vue.js", qIcon: Frame, aIcon: VuejsIcon },
+];
+
+export const memoTestGameDataMobile = [
+  { q: "Edad", a: "25", qIcon: UserCircle, aIcon: UserCircle },
+  { q: "Origen", a: "Argentina", qIcon: MapPin, aIcon: MapPin },
+  { q: "Rol", a: "Front End", qIcon: CodeIcon, aIcon: CodeIcon },
+  { q: "Nombre", a: "Juan Cruz", qIcon: Brain, aIcon: Brain },
+  { q: "Hobby", a: "Programar", qIcon: Zap, aIcon: Zap },
+  { q: "Experiencias", a: "3", qIcon: BookOpen, aIcon: BookOpen },
 ];
 
 export const homePageSectionsData: HomePageSection[] = [
@@ -172,10 +181,10 @@ export const homePageSectionsData: HomePageSection[] = [
         <div className="p-4 text-center w-full max-w-2xl mx-auto flex flex-col items-center justify-center h-full">
             <Brain className="mx-auto h-12 w-12 sm:h-16 sm:w-16 mb-4 text-primary" />
             <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-white">Pon a prueba tu memoria</h3>
-            <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md">
+            <p className="text-base sm:text-lg text-white/80 mb-6 max-w-md hidden md:block">
                 Encuentra los pares correctos y descubre algunos datos sobre mí. ¡Buena suerte!
             </p>
-            <MemoTestGame pairs={memoTestGameData} />
+            <MemoTestGame desktopPairs={memoTestGameDataDesktop} mobilePairs={memoTestGameDataMobile} />
         </div>
       </React.Fragment>
     ),

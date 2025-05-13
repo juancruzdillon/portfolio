@@ -115,7 +115,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </CardContent>
         </Card>
       </div>
-      <BottomNavBar />
     </div>
   );
 }

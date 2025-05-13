@@ -264,9 +264,12 @@ export function BottomNavBar() {
   return (
     <>
       <nav 
-        className="fixed bottom-0 left-0 right-0 h-16 bg-card border-t border-border shadow-md flex justify-around items-center md:hidden z-50 mobile-nav-padding"
-        style={{ willChange: 'transform' }} // Added will-change style
-      >
+        className="fixed inset-x-0 bottom-0 md:hidden
+          pb-[env(safe-area-inset-bottom)]
+          h-16 bg-card border-t border-border shadow-md
+          flex justify-around items-center z-50
+          mobile-nav-padding"
+        >
         {navItems.map((item) => (
           <NavItem key={item.label} {...item} />
         ))}

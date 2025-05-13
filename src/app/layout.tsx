@@ -65,6 +65,13 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png'
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    userScalable: false,
+    viewportFit: 'cover'
   }
 };
 
@@ -74,13 +81,13 @@ export default function RootLayout({
   children: React.ReactNode;  
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} h-full flex flex-col`}>        
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} flex flex-col`}>        
         <main className='flex-grow overflow-y-auto md:pl-20'>
           {children}
+          <Toaster />
+          <BottomNavBar /> {/* Added BottomNavBar here */}
         </main>
-        <Toaster />
-        <BottomNavBar /> {/* Added BottomNavBar here */}
       </body>
     </html>
   );

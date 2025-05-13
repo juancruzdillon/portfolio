@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { Puzzle, Target as TargetIcon, Briefcase as BriefcaseIcon } from 'lucide-react';
 import Confetti from 'react-confetti';
-
 interface MemoCard {
   id: string;
   value: string;
@@ -17,7 +16,8 @@ interface MemoCard {
 }
 
 interface MemoTestGameProps {
-  pairs: { q: string; a: string; qIcon?: React.ElementType; aIcon?: React.ElementType }[];
+  desktopPairs: { q: string; a: string; qIcon?: React.ElementType; aIcon?: React.ElementType }[];
+  mobilePairs: { q: string; a: string; qIcon?: React.ElementType; aIcon?: React.ElementType }[];
 }
 
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -29,13 +29,14 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
-const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
+const MemoTestGame: React.FC<MemoTestGameProps> = ({ desktopPairs, mobilePairs }) => {
   const [cards, setCards] = useState<MemoCard[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedPairIds, setMatchedPairIds] = useState<string[]>([]);
   const [moves, setMoves] = useState(0);
   const [isInteractionDisabled, setIsInteractionDisabled] = useState(false);
   const [isGameWon, setIsGameWon] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const styleId = 'memo-test-game-styles';
@@ -51,9 +52,27 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
     }
   }, []);
 
-  const initializeGame = useCallback(() => {
+  useEffect(() => {
+    const checkIsMobile = () => {
+      // Use matchMedia for a more robust check against Tailwind's 'md' breakpoint (768px)
+      setIsMobile(window.matchMedia('(max-width: 767px)').matches);
+    };
+
+    // Initial check
+    checkIsMobile();
+
+    // Add event listener
+    window.addEventListener('resize', checkIsMobile);
+
+    // Clean up listener
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  const initializeGame = useCallback((mobile: boolean) => {
+    const gamePairs = mobile ? mobilePairs : desktopPairs;
     const gameCards: MemoCard[] = [];
-    pairs.forEach((pair, index) => {
+
+    gamePairs.forEach((pair, index) => {
       const pairId = `pair-${index}`;
       gameCards.push({ id: `card-${index}-q`, value: pair.q, pairId, isFlipped: false, isMatched: false, Icon: pair.qIcon });
       gameCards.push({ id: `card-${index}-a`, value: pair.a, pairId, isFlipped: false, isMatched: false, Icon: pair.aIcon });
@@ -63,17 +82,19 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
     setMatchedPairIds([]);
     setMoves(0);
     setIsGameWon(false);
-  }, [pairs]);
+  }, [isMobile, desktopPairs, mobilePairs]); // Add isMobile, desktopPairs, and mobilePairs as dependencies
+
 
   useEffect(() => {
-    initializeGame();
-  }, [initializeGame]);
+    initializeGame(isMobile);
+  }, [initializeGame, isMobile]);
 
   useEffect(() => {
-    if (matchedPairIds.length === pairs.length && pairs.length > 0) {
+    const currentPairs = isMobile ? mobilePairs : desktopPairs;
+    if (matchedPairIds.length === currentPairs.length && currentPairs.length > 0) {
       setIsGameWon(true);
     }
-  }, [matchedPairIds, pairs.length]);
+  }, [matchedPairIds, isMobile]); // Depend on isMobile to get correct pairs length
 
   const handleCardClick = (index: number) => {
     if (isInteractionDisabled || cards[index].isFlipped || cards[index].isMatched || isGameWon) {
@@ -83,7 +104,7 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
     const newFlippedIndices = [...flippedIndices, index];
     setFlippedIndices(newFlippedIndices);
 
-    const newCards = cards.map((card, i) => 
+    const newCards = cards.map((card, i) =>
       i === index ? { ...card, isFlipped: true } : card
     );
     setCards(newCards);
@@ -139,29 +160,38 @@ const MemoTestGame: React.FC<MemoTestGameProps> = ({ pairs }) => {
             key={card.id}
             onClick={() => handleCardClick(index)}
             className={cn(
-              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md min-w-[60px] min-h-[60px] sm:min-w-[90px] sm:min-h-[90px]",
-              card.isFlipped ? "bg-card text-card-foreground rotate-y-180" : "bg-primary text-primary-foreground",
-              card.isMatched ? "opacity-100 cursor-not-allowed border-2 border-green-500" : "",
+              "aspect-square flex items-center justify-center p-2 cursor-pointer transition-all duration-300 transform-style-preserve-3d rounded-lg shadow-md min-w-[70px] min-h-[70px] sm:min-w-[90px] sm:min-h-[90px]",
+              card.isFlipped ? "rotate-y-180 bg-card text-card-foreground" : "bg-primary text-primary-foreground",
               (isInteractionDisabled || isGameWon) && !card.isMatched && !card.isFlipped ? "cursor-not-allowed" : ""
             )}
           >
-            <div className={cn("text-center backface-hidden w-full h-full flex flex-col items-center justify-center", card.isFlipped ? "rotate-y-180" : "")}>
-              {card.isFlipped ? (
-                <>
-                  {card.Icon && <card.Icon className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 text-primary" />}
-                  <span className="text-xs sm:text-sm font-medium break-words">{card.value}</span>
-                </>
-              ) : (
-                <Puzzle className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground/80" />
-              )}
+            {/* Front Face (Puzzle Icon) */}
+            <div className={cn(
+              "absolute w-full h-full backface-hidden flex items-center justify-center text-center p-2"
+            )}>
+              <Puzzle className="w-8 h-8 sm:w-10 sm:h-10 text-primary-foreground/80" />
             </div>
+
+            <div
+              className={cn(
+                "absolute w-full h-full backface-hidden flex flex-col items-center justify-center text-center rotate-y-180",
+                "min-w-0 overflow-hidden"
+              )}
+            >
+              {card.Icon && (
+                <card.Icon className="w-8 h-8 sm:w-8 sm:h-8 mx-auto mb-1 text-primary" />
+              )}
+              <span className="block w-full text-xs sm:text-xs font-medium break-all">
+                {card.value}
+              </span>
+            </div>
+
           </Card>
         ))}
       </div>
-      {!isGameWon && moves >= 20 && <p className="text-xl font-bold text-red-500 mt-2">Mmm... O no tenés mucha memoria o no recorriste todo el portfolio aún 🥸</p>}
       {(isGameWon || moves > 0) && (
-         <Button onClick={initializeGame} variant="outline" className="mt-6 bg-card/80 hover:bg-card text-white hover:text-foreground">
-            {isGameWon ? 'Jugar de Nuevo' : 'Reiniciar Juego'}
+        <Button onClick={() => initializeGame(isMobile)} variant="outline" className="mt-6 bg-card/80 hover:bg-card text-white hover:text-foreground">
+          {isGameWon ? 'Jugar de Nuevo' : 'Reiniciar Juego'}
         </Button>
       )}
     </div>
