@@ -23,6 +23,10 @@
     --muted: 220 15% 92%; /* Muted background */
     --muted-foreground: 220 10% 45%; /* Muted text */
 
+    --muted-scroll: #E5E7EB;
+    --primary-scroll: #008080;
+    --accent-scroll: #20B2AA;
+
     --accent: 180 80% 35%; /* Brighter Teal for hover/active, interactive elements */
     --accent-foreground: 0 0% 98%; /* White text on accent */
 
@@ -111,34 +115,28 @@
 
 }
 
-:root {
-  --muted: #E5E7EB;
-  --primary: #008080;
-  --accent: #20B2AA;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--muted);
+  background: var(--muted-scroll);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--primary-scroll);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+  background: var(--accent-scroll);
 }
 
 body {
   scrollbar-width: thin;
-  scrollbar-color: var(--primary) var(--muted);
+  scrollbar-color: var(--primary-scroll) var(--muted-scroll);
 }
 
 @keyframes shimmer {
