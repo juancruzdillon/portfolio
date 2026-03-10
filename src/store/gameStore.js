@@ -75,6 +75,7 @@ export const gameStore = reactive({
   },
 
   checkWinCondition() {
+    // We check if sectionsEatenThisLevel reaches the full amount of sections per level (which is 7).
     if (this.sectionsEatenThisLevel >= 7 && this.status !== 'paused') {
       this.updateHighScore();
       this.status = 'win';

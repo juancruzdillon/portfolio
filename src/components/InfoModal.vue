@@ -27,7 +27,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { gameStore } from '../store/gameStore'
 
-const isWinReady = computed(() => gameStore.unlockedSections.length >= 7)
+const isWinReady = computed(() => gameStore.sectionsEatenThisLevel >= 7)
 const canClose = ref(false)
 let timer = null
 

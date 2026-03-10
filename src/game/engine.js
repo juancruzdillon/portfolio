@@ -267,7 +267,10 @@ class Entity {
     get speed() {
         // En mobile el tilesize es menor. Usar ratio puro para que la 
         // velocidad escale impecablemente sin importar la resolución.
-        return tileSize * this.speedRatio;
+        // Aumentamos ligeramente la proporción en mobile para que no se sienta lento
+        let isMobile = window.innerWidth < 768;
+        let mobileMultiplier = isMobile ? 1.2 : 1;
+        return tileSize * this.speedRatio * mobileMultiplier;
     }
 
     move() {
@@ -412,7 +415,7 @@ class Ghost extends Entity {
     }
 
     get speed() {
-        let base = tileSize * this.speedRatio;
+        let base = super.speed;
         // Difficulty multiplier: +5% speed for each unlocked section
         let multiplier = 1 + (gameStore.unlockedSections.length * 0.05);
         return base * multiplier;
