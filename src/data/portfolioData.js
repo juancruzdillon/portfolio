@@ -1,12 +1,12 @@
 export const portfolioData = {
-  3: {
-      id: 'about', title: 'Sobre Mí', color: '#4ade80', icon: '<i class="fas fa-user text-green-400"></i>',
-      content: `<p class="mb-4 text-lg">¡Hola! Soy <strong class="text-green-400">Juan Cruz Dillon</strong>.</p>
-                <p class="text-gray-300">Soy un <strong class="text-white">AI-Augmented Full-Stack Developer</strong>. Me dedico a potenciar el desarrollo de software tradicional integrando herramientas de Inteligencia Artificial para crear soluciones más rápidas, inteligentes y escalables. Armé este portfolio interactivo para que explorar mi perfil sea tan divertido como desarrollar código.</p>`
-  },
-  4: {
-      id: 'skills', title: 'Habilidades', color: '#60a5fa', icon: '<i class="fas fa-code text-blue-400"></i>',
-      content: `<div class="space-y-6">
+    3: {
+        id: 'about', title: 'Sobre Mí', color: '#4ade80', icon: '<i class="fas fa-user text-green-400"></i>',
+        content: `<p class="mb-4 text-lg">Soy <strong class="text-green-400">Juan Cruz Dillon</strong>.</p>
+                <p class="text-gray-300">Un <strong class="text-white">programador y entusiasta de la tecnología</strong>. Me gusta estar siempre al día con las nuevas tecnologías, y hoy en día, con el uso de los diferentes tipos de AI. Arranqué programando CRM'S Low Code y a medida que fui ganando experiencia fuí mutando hasta lo que soy hoy, alguien capaz de desenvolerme en distintos rubros con ideas no sólo de programación sino también de negocios, marketing, producto entre otras. Me considero una persona que puede trabajar en equipo sin problema, es más, mientras más en equipo se trabaje, mejor va a ser el resultado. A su vez, considero que soy resolutivo y de aprendizaje continuo. Hoy en día estoy buscando una oportunidad en una empresa que me permita seguir creciendo y explorar nuevos "mundos"</p>`
+    },
+    4: {
+        id: 'skills', title: 'Habilidades', color: '#60a5fa', icon: '<i class="fas fa-code text-blue-400"></i>',
+        content: `<div class="space-y-6">
                   <!-- Habilidades Técnicas -->
                   <div>
                       <h3 class="text-lg font-bold text-blue-400 mb-3 border-b border-blue-400/30 pb-1">Habilidades Técnicas</h3>
@@ -72,10 +72,10 @@ export const portfolioData = {
                       </div>
                   </div>
                 </div>`
-  },
-  5: {
-      id: 'projects', title: 'Proyectos', color: '#c084fc', icon: '<i class="fas fa-rocket text-purple-400"></i>',
-      content: `<div class="space-y-4">
+    },
+    5: {
+        id: 'projects', title: 'Proyectos', color: '#c084fc', icon: '<i class="fas fa-rocket text-purple-400"></i>',
+        content: `<div class="space-y-4">
                   <div class="bg-white/5 p-4 rounded-xl border border-white/10">
                       <div class="flex justify-between items-start mb-2">
                           <h3 class="text-xl font-bold text-purple-400">Streamy</h3>
@@ -106,10 +106,10 @@ export const portfolioData = {
                       </div>
                   </div>
                 </div>`
-  },
-  6: {
-      id: 'contact', title: 'Contacto', color: '#f87171', icon: '<i class="fas fa-envelope text-red-400"></i>',
-      content: `<p class="mb-6 text-center text-gray-300">¿Tienes un proyecto en mente o buscas sumar a alguien a tu equipo? ¡Hablemos!</p>
+    },
+    6: {
+        id: 'contact', title: 'Contacto', color: '#f87171', icon: '<i class="fas fa-envelope text-red-400"></i>',
+        content: `<p class="mb-6 text-center text-gray-300">¿Tienes un proyecto en mente o buscas sumar a alguien a tu equipo? ¡Hablemos!</p>
                 <div class="flex flex-col space-y-3 max-w-sm mx-auto pb-4 w-full px-2">
                   <a href="https://www.linkedin.com/in/juancruzdillon" target="_blank" class="flex items-center justify-center space-x-3 bg-white/5 hover:bg-blue-600/20 border border-blue-500/30 p-3 rounded-lg transition-colors w-full">
                       <i class="fab fa-linkedin text-xl text-blue-400 shrink-0"></i> <span class="break-words">LinkedIn</span>
@@ -121,10 +121,10 @@ export const portfolioData = {
                       <i class="fas fa-envelope text-xl text-red-400 shrink-0"></i> <span class="text-xs sm:text-sm md:text-base break-all">juancruzdillon1999@gmail.com</span>
                   </a>
                 </div>`
-  },
-  7: {
-      id: 'experience', title: 'Experiencia', color: '#fbbf24', icon: '<i class="fas fa-briefcase text-yellow-400"></i>',
-      content: `<div class="space-y-6 ml-4">
+    },
+    7: {
+        id: 'experience', title: 'Experiencia', color: '#fbbf24', icon: '<i class="fas fa-briefcase text-yellow-400"></i>',
+        content: `<div class="space-y-6 ml-4">
                   <div class="border-l-2 border-yellow-400/50 pl-5 relative">
                       <div class="absolute w-3 h-3 bg-yellow-400 rounded-full -left-[7px] top-1.5 shadow-[0_0_8px_#fbbf24]"></div>
                       <h3 class="font-bold text-yellow-400 text-xl">Telecentro S.A</h3>
@@ -166,10 +166,10 @@ export const portfolioData = {
                       </ul>
                   </div>
                 </div>`
-  },
-  8: {
-      id: 'education', title: 'Educación', color: '#34d399', icon: '<i class="fas fa-graduation-cap text-emerald-400"></i>',
-      content: `<div class="space-y-4">
+    },
+    8: {
+        id: 'education', title: 'Educación', color: '#34d399', icon: '<i class="fas fa-graduation-cap text-emerald-400"></i>',
+        content: `<div class="space-y-4">
                   <div class="bg-white/5 p-4 rounded-xl border border-white/10">
                       <div class="flex items-start space-x-3">
                           <i class="fas fa-university text-emerald-400 text-2xl mt-1"></i>
@@ -191,10 +191,10 @@ export const portfolioData = {
                       </div>
                   </div>
                 </div>`
-  },
-  9: {
-      id: 'languages', title: 'Idiomas', color: '#f472b6', icon: '<i class="fas fa-language text-pink-400"></i>',
-      content: `<div class="space-y-3">
+    },
+    9: {
+        id: 'languages', title: 'Idiomas', color: '#f472b6', icon: '<i class="fas fa-language text-pink-400"></i>',
+        content: `<div class="space-y-3">
                   <div class="flex justify-between items-center bg-white/5 p-4 rounded-lg border border-white/10">
                       <div class="flex items-center space-x-3">
                           <span class="text-2xl">🇦🇷</span>
@@ -210,13 +210,13 @@ export const portfolioData = {
                       <span class="text-gray-300 text-sm font-semibold bg-white/10 px-3 py-1 rounded-full">Low Intermediate</span>
                   </div>
                 </div>`
-  }
+    }
 };
 
 export const funFacts = [
-  "Me copa meterme a la cocina a inventar platos y probar cosas atípicas 🍳",
-  "Dicen por ahí que preparo el mejor sushi de la zona (modestia aparte) 🍣",
-  "Acá hay grieta: tomo el mate con coco rallado. Vengan de a uno 🧉🥥",
-  "¿Playa y arena? Paso. Yo soy mil veces del team montaña y lagos ⛰️",
-  "Si algún día me pierdo, búsquenme por Bariloche. Es mi lugar en el mundo 🏔️❄️"
+    "Me gusta cocinar, y muchas veces hago recetas de tiktok 🍳",
+    "El asado es lo que más me gusta, pero lo que peor hago 🥩",
+    "Tomo el mate con coco rallado 🥥",
+    "Me encanta sacar fotos (tengo una camara 'pro') de paisajes y retratos 📸",
+    "Mi lugar favorito en el mundo es Bariloche 🏔️❄️"
 ];
