@@ -7,6 +7,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { initGameEngine, setPlayerDirection } from '../game/engine'
+import { gameStore } from '../store/gameStore'
 
 const gameCanvas = ref(null)
 
@@ -29,7 +30,11 @@ const handleTouchStart = (e) => {
 }
 
 const handleTouchMove = (e) => {
-    e.preventDefault();
+    // Only block scroll while actively playing — allow scroll on intro, modals, win screen, etc.
+    const activeStatuses = ['playing', 'respawning']
+    if (activeStatuses.includes(gameStore.status)) {
+        e.preventDefault()
+    }
 }
 
 const handleTouchEnd = (e) => {
