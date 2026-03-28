@@ -32,7 +32,7 @@ function engine() {
 // ─── Connect ──────────────────────────────────────────────────────────────────
 
 export function connect() {
-    if (socket?.connected) return;
+    if (socket) return; // Already connected or connecting — avoid duplicate handlers
 
     socket = io(SOCKET_URL, {
         transports: ['websocket', 'polling'],
@@ -63,6 +63,16 @@ export function emitSmallPelletEaten(row, col) {
 
 export function emitBigPelletEaten(sectionId, row, col) {
     socket?.emit('big_pellet_eaten', { sectionId, row, col });
+}
+
+/** Notify partner that we lost a life (they'll see our pac-man flicker). */
+export function emitPlayerRespawning() {
+    socket?.emit('player_respawning');
+}
+
+/** Notify server we ran out of lives — must be called before disconnect(). */
+export function emitPlayerGameOver() {
+    socket?.emit('player_game_over');
 }
 
 // Sends the local player's normalised position to the server every 50ms.
@@ -182,12 +192,21 @@ function _registerHandlers() {
         gameStore.status = 'win';
     });
 
-    // Partner disconnected mid-game
-    socket.on('partner_disconnected', () => {
+    // Partner lost a life — show flicker on their avatar
+    socket.on('partner_respawning', async ({ playerId }) => {
+        const eng = await engine();
+        eng.setRemotePlayerRespawning(playerId);
+    });
+
+    // Partner left the room (game over or disconnected)
+    socket.on('partner_left', async ({ reason, playerName }) => {
         multiplayerStore.partnerDisconnected = true;
-        engine().then(eng => eng.removeRemotePlayer(multiplayerStore.partnerInfo?.id));
-        // The game continues in solo-like mode; show a toast
-        gameStore.setToast('Tu compañero se desconectó. ¡Continúa tú solo!');
+        const eng = await engine();
+        eng.removeRemotePlayer(multiplayerStore.partnerInfo?.id);
+        const msg = reason === 'gameover'
+            ? `${playerName} perdió todas sus vidas. ¡Continuá solo!`
+            : 'Tu compañero se desconectó. ¡Continuá solo!';
+        gameStore.setToast(msg);
     });
 
     socket.on('disconnect', () => {

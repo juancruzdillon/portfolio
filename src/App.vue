@@ -54,7 +54,7 @@ import { watch } from 'vue'
 import { gameStore } from './store/gameStore'
 import { multiplayerStore } from './store/multiplayerStore'
 import { resetGameData, initGameEngine, startGameLoop, clearMultiplayerState } from './game/engine'
-import { joinLobby, disconnect, stopPositionSync } from './services/socketService'
+import { joinLobby, disconnect, stopPositionSync, emitPlayerRespawning, emitPlayerGameOver } from './services/socketService'
 
 import IntroScreen from './components/IntroScreen.vue'
 import LobbyScreen from './components/LobbyScreen.vue'
@@ -66,10 +66,16 @@ import InfoModal from './components/InfoModal.vue'
 import WinScreen from './components/WinScreen.vue'
 import GameOverScreen from './components/GameOverScreen.vue'
 
-// When a multiplayer player runs out of lives, disconnect from the room so the
-// server notifies the partner (partner_disconnected) and removes the dead player's avatar.
+// Sync death events to the partner so their screen reflects what happened.
 watch(() => gameStore.status, (newStatus) => {
-    if (newStatus === 'gameover' && multiplayerStore.mode === 'multiplayer') {
+    if (multiplayerStore.mode !== 'multiplayer') return
+
+    if (newStatus === 'respawning') {
+        // Lost a life but still in game — partner sees our pac-man flicker
+        emitPlayerRespawning()
+    } else if (newStatus === 'gameover') {
+        // Lost all lives — notify partner with a proper message, then disconnect
+        emitPlayerGameOver()
         stopPositionSync()
         disconnect()
     }

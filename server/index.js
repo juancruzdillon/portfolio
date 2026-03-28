@@ -58,6 +58,18 @@ io.on('connection', (socket) => {
         if (room) room.handleBigPelletEaten(socket.id, sectionId, row, col);
     });
 
+    // Player lost a life but is still in game — partner shows flicker animation
+    socket.on('player_respawning', () => {
+        const room = roomManager.getRoom(socket.id);
+        if (room) room.handlePlayerRespawning(socket.id);
+    });
+
+    // Player lost all lives — sent right before the socket disconnects
+    socket.on('player_game_over', () => {
+        const room = roomManager.getRoom(socket.id);
+        if (room) room.handlePlayerGameOver(socket.id);
+    });
+
     socket.on('disconnect', () => {
         console.log(`[-] Disconnected: ${socket.id}`);
         roomManager.removePlayer(socket.id);

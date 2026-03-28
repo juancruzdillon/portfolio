@@ -167,6 +167,20 @@ export function setRemotePlayer(id, data) {
 export function removeRemotePlayer(id) { remotePlayers.delete(id); }
 
 /**
+ * Mark a remote player as respawning for 1 second so their avatar flickers,
+ * making it clear to the local player that their partner just died.
+ */
+export function setRemotePlayerRespawning(id) {
+    const p = remotePlayers.get(id);
+    if (!p) return;
+    remotePlayers.set(id, { ...p, respawning: true });
+    setTimeout(() => {
+        const current = remotePlayers.get(id);
+        if (current) remotePlayers.set(id, { ...current, respawning: false });
+    }, 1000);
+}
+
+/**
  * Returns the local player's state in normalised coordinates for position sync.
  * Returns null if the engine hasn't started yet.
  */
@@ -369,6 +383,9 @@ function drawMap() {
 
 function drawRemotePacman(data) {
     if (!tileSize || !ctx) return;
+
+    // Flicker every 150ms while the partner is respawning after a death
+    if (data.respawning && Math.floor(Date.now() / 150) % 2 === 0) return;
 
     const px = data._x ?? (data.nx * cols * tileSize);
     const py = data._y ?? (data.ny * rows * tileSize);
